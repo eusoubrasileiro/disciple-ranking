@@ -5,7 +5,8 @@
     { "id": 1, "description": "Participar do culto", "points": 10, "icon": "Church" },
     { "id": 2, "description": "Participar da Embaixada", "points": 10, "icon": "Crown" },
     { "id": 3, "description": "Trazer visitante", "points": 25, "icon": "UserPlus" },
-    { "id": 4, "description": "Decorar versículo (médio)", "points": 35, "icon": "BookOpen" }
+    { "id": 4, "description": "Decorar versículo (médio)", "points": 35, "icon": "BookOpen" },
+    { "id": 5, "description": "Pre-requisitos Candidato", "points": 50, "icon": "BadgeCheck" }
   ],
   "participants": [
     { "id": 1, "name": "Arhur", "points": 30 },

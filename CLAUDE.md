@@ -66,12 +66,13 @@ The application uses a custom "Royal Theme" design system with:
 The `public/data/leaderboard.json` structure:
 ```typescript
 {
-  season: string;           // e.g., "2025"
+  season: string;           // e.g., "2026"
   updatedAt: string;        // ISO date string
   rules: Array<{
     id: number;
     description: string;
     points: number;
+    icon?: string;          // Optional lucide-react icon name (e.g., "Church", "Crown")
   }>;
   participants: Array<{
     id: number;
@@ -93,6 +94,28 @@ The `public/data/leaderboard.json` structure:
 Modify `public/data/leaderboard.json` directly. The sorting logic is in `useLeaderboardData.ts:46-51`:
 - Primary sort: Points (descending)
 - Secondary sort: Name (alphabetical, locale-aware)
+
+### Adding Icons to Rules
+Rules can display custom icons from lucide-react. To add a new icon to a rule:
+
+1. **Add icon to JSON data** (`public/data/leaderboard.json`):
+   ```json
+   { "id": 5, "description": "Pre-requisitos", "points": 50, "icon": "BadgeCheck" }
+   ```
+
+2. **Update RulesSection component** (`src/components/RulesSection.tsx`):
+   - Import the icon: `import { ..., BadgeCheck } from 'lucide-react';`
+   - Add to iconMap: `BadgeCheck,`
+
+**Available icons**: Browse at https://lucide.dev/icons
+
+**Current icons in use**:
+- `Church` - Worship attendance
+- `Crown` - Embassy participation
+- `UserPlus` - Bringing visitors
+- `BookOpen` - Scripture memorization
+- `BadgeCheck` - Prerequisites
+- `Plus` - Default fallback
 
 ### Adding New Routes
 Insert routes in `src/App.tsx` BEFORE the `<Route path="*" element={<NotFound />} />` catch-all.

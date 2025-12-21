@@ -1,4 +1,4 @@
-import { Trophy, Plus, Church, Crown, UserPlus, BookOpen } from 'lucide-react';
+import { Trophy, Plus, Church, Crown, UserPlus, BookOpen, BadgeCheck } from 'lucide-react';
 import type { Rule } from '@/hooks/useLeaderboardData';
 import type { LucideIcon } from 'lucide-react';
 
@@ -13,6 +13,7 @@ export function RulesSection({ rules }: RulesSectionProps) {
     Crown,
     UserPlus,
     BookOpen,
+    BadgeCheck,
     Plus, // fallback
   };
 
