@@ -1,0 +1,22 @@
+{
+  "season": "2025",
+  "updatedAt": "2025-12-21T10:30:00",
+  "rules": [
+    { "id": 1, "description": "Participar do culto", "points": 10 },
+    { "id": 2, "description": "Participar da Embaixada", "points": 10 },
+    { "id": 3, "description": "Trazer visitante", "points": 15 },
+    { "id": 4, "description": "Decorar versículo", "points": 5 }
+  ],
+  "participants": [
+    { "id": 1, "name": "Pedro Henrique", "points": 85 },
+    { "id": 2, "name": "Lucas Gabriel", "points": 120 },
+    { "id": 3, "name": "Matheus Silva", "points": 95 },
+    { "id": 4, "name": "João Victor", "points": 120 },
+    { "id": 5, "name": "Gabriel Santos", "points": 70 },
+    { "id": 6, "name": "Rafael Oliveira", "points": 55 },
+    { "id": 7, "name": "Davi Almeida", "points": 45 },
+    { "id": 8, "name": "Felipe Costa", "points": 80 },
+    { "id": 9, "name": "Bruno Ferreira", "points": 65 },
+    { "id": 10, "name": "André Lima", "points": 40 }
+  ]
+}
