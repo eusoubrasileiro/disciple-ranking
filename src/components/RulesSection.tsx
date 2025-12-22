@@ -33,7 +33,6 @@ export function RulesSection({ rules }: RulesSectionProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
           {rules.map((rule, index) => {
             const IconComponent = rule.icon && iconMap[rule.icon] ? iconMap[rule.icon] : Plus;
-
             return (
               <div
                 key={rule.id}
@@ -45,7 +44,6 @@ export function RulesSection({ rules }: RulesSectionProps) {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-medium text-foreground">{rule.description}</p>
-                  <p className="text-sm text-muted-foreground">Ação válida</p>
                 </div>
                 <div className="flex-shrink-0 px-3 py-1.5 rounded-lg bg-accent text-accent-foreground font-bold text-sm">
                   +{rule.points}
