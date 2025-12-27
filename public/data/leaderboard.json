@@ -9,6 +9,8 @@
 { "id": 4, "description": "Decorar versículo (<20 palavras)", "points": 25, "icon": "BookOpen" },
     { "id": 6, "description": "Pre-requisitos Candidato", "points": 55, "icon": "BadgeCheck" }
   ],
+{ "id": 7, "description": "Tarefas Manual Candidato", "points": 55, "icon": "BadgeCheck" }
+  ],
   "participants": [
     { "id": 1, "name": "Arhur", "points": 45 },
     { "id": 2, "name": "Daniel", "points": 35 },
