@@ -11,14 +11,15 @@
     { "id": 7, "description": "Tarefas Manual Candidato", "points": 55, "icon": "BadgeCheck" }
   ],
   "participants": [
-    { "id": 1, "name": "Arhur", "points": 55, "memorizedVerses": ["Jo 3:16", "Sl 23:1", "Jo 14:6"] },
-    { "id": 2, "name": "Daniel", "points": 45, "memorizedVerses": ["Jo 3:16"] },
-    { "id": 3, "name": "Richarlyson", "points": 45, "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 119:11"] },
+    { "id": 1, "name": "Arhur", "points": 150, "memorizedVerses": ["Jo 3:16", "Sl 23:1", "Jo 14:6"] }, 
+    { "id": 2, "name": "Daniel", "points": 80, "memorizedVerses": ["Jo 3:16"] }, 
+    { "id": 3, "name": "Richarlyson", "points": 130, "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 119:11"] }, 
     { "id": 4, "name": "Miguel", "points": 35 },
-    { "id": 5, "name": "Felipe", "points": 45, "memorizedVerses": ["Sl 23:1"] },
-    { "id": 6, "name": "Caio", "points": 20, "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 23:1"] },
+    { "id": 5, "name": "Felipe", "points": 60, "memorizedVerses": ["Sl 23:1"] }, 
+    { "id": 6, "name": "Caio", "points": 105, "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 23:1"] }, 
     { "id": 7, "name": "Elias", "points": 10 },
     { "id": 8, "name": "João", "points": 10 },
     { "id": 9, "name": "Kaique", "points": 10 }
   ]
 }
+
