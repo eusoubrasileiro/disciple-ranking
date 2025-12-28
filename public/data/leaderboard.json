@@ -2,13 +2,13 @@
   "season": "2026",
   "updatedAt": "2025-12-21T10:30:00",
   "rules": [
-    { "id": 1, "description": "Participar do culto", "points": 2, "icon": "Church" },
+    { "id": 1, "description": "Participar do culto", "points": 2, "icon": "Church", "explanation": "Beneficia a participação de pessoas não cristãs e não membros da igreja." },
     { "id": 2, "description": "Participar da Embaixada", "points": 10, "icon": "Crown" },
     { "id": 3, "description": "Trazer visitante", "points": 25, "icon": "UserPlus" },
     { "id": 4, "description": "Decorar versículo (<20 palavras)", "points": 25, "icon": "BookOpen", "explanation": "Aceita-se trocar uma palavra por outra com mesmo significado desde que saiba referência" },
     { "id": 5, "description": "Decorar versículo (>=20 palavras)", "points": 35, "icon": "BookOpen", "explanation": "Aceita-se trocar uma palavra por outra com mesmo significado desde que saiba referência" },    
     { "id": 6, "description": "Pre-requisitos Candidato", "points": 55, "icon": "BadgeCheck" },
-    { "id": 7, "description": "Tarefas Manual Candidato", "points": 55, "icon": "BadgeCheck" }
+    { "id": 7, "description": "Tarefa Manual Candidato", "points": 55, "icon": "BadgeCheck" }
   ],
   "participants": [
     { "id": 1, "name": "Arthur", "points": 175, "memorizedVerses": ["Jo 3:16", "Sl 23:1", "Jo 14:6", "Fp 4:13"] }, 
