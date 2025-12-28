@@ -12,3 +12,20 @@ npm run dev
 ```bash
 npm run build
 ```
+
+
+## Sobre Pontuação Anotações
+
+### Ir ao Culto
+
+Ir à embaixada é 10 pontos MAS ir por quê ir ao culto é só 2 pontos? 
+Ser cristão é mais difícil do que ser igrejeiro ou do que ser Batista.
+Você pode ir em todas as programações, cultos etc e perder seu irmão, mãe, vizinhos etc, que são seu próximo. 
+Além de ajudar a participação de pessoas não cristãs e não membros da igreja.
+
+### Keep in mind
+
+Disciplinas Espiritais, Evangelismo e Discipulado são as tarefas mais importantes do cristão.
+O esforço para cumprir essas tarefas é o que mais importa e agrada a Deus. 
+Os resultados são secundários, pois o Senhor quem faz crescer.
+
