@@ -11,7 +11,7 @@
     { "id": 7, "description": "Tarefas Manual Candidato", "points": 55, "icon": "BadgeCheck" }
   ],
   "participants": [
-    { "id": 1, "name": "Arhur", "points": 150, "memorizedVerses": ["Jo 3:16", "Sl 23:1", "Jo 14:6"] }, 
+    { "id": 1, "name": "Arthur", "points": 175, "memorizedVerses": ["Jo 3:16", "Sl 23:1", "Jo 14:6", "Fp 4:13"] }, 
     { "id": 2, "name": "Daniel", "points": 80, "memorizedVerses": ["Jo 3:16"] }, 
     { "id": 3, "name": "Richarlyson", "points": 130, "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 119:11"] }, 
     { "id": 4, "name": "Miguel", "points": 35 },
