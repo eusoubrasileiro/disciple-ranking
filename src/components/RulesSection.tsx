@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Trophy, Plus, Church, Crown, UserPlus, BookOpen, BadgeCheck, HelpCircle } from 'lucide-react';
 import type { Rule } from '@/hooks/useLeaderboardData';
 import type { LucideIcon } from 'lucide-react';
@@ -13,6 +14,8 @@ interface RulesSectionProps {
 }
 
 export function RulesSection({ rules }: RulesSectionProps) {
+  const [openTooltip, setOpenTooltip] = useState<number | null>(null);
+
   // Icon mapping for dynamic icon rendering
   const iconMap: Record<string, LucideIcon> = {
     Church,
@@ -52,9 +55,15 @@ export function RulesSection({ rules }: RulesSectionProps) {
                   <div className="flex-1 min-w-0 flex items-center gap-2">
                     <p className="font-medium text-foreground">{rule.description}</p>
                     {rule.explanation && (
-                      <Tooltip>
+                      <Tooltip
+                        open={openTooltip === rule.id}
+                        onOpenChange={(open) => setOpenTooltip(open ? rule.id : null)}
+                      >
                         <TooltipTrigger asChild>
-                          <button className="flex-shrink-0 text-muted-foreground hover:text-foreground transition-colors">
+                          <button
+                            onClick={() => setOpenTooltip(openTooltip === rule.id ? null : rule.id)}
+                            className="flex-shrink-0 text-muted-foreground hover:text-foreground transition-colors"
+                          >
                             <HelpCircle className="w-4 h-4" />
                           </button>
                         </TooltipTrigger>
