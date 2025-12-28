@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2025-12-28T01:23:46.482Z",
+  "defaultVersion": "NVI",
+  "versions": {
+    "NVI": {
+      "id": 129,
+      "name": "Nova Versão Internacional",
+      "fullTitle": "Nova Versão Internacional"
+    },
+    "BLT": {
+      "id": 3254,
+      "name": "Bíblia Livre Para Todos",
+      "fullTitle": "Bíblia Livre Para Todos"
+    }
+  },
+  "verses": {
+    "Jo 3:16": {
+      "NVI": {
+        "reference": "João 3:16",
+        "text": "― Porque Deus tanto amou o mundo que deu o seu Filho Unigênito, para que todo aquele que nele crer não pereça, mas tenha a vida eterna.",
+        "wordCount": 26,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/JHN.3.16"
+      },
+      "BLT": {
+        "reference": "João 3:16",
+        "text": "Pois Deus amou tanto o mundo, que deu o seu único Filho, para que todos os que acreditam nele não morram, mas, sim, tenham a vida eterna.",
+        "wordCount": 27,
+        "youversionUrl": "https://www.bible.com/pt/bible/3254/JHN.3.16"
+      }
+    },
+    "Sl 23:1": {
+      "NVI": {
+        "reference": "Salmos 23:1",
+        "text": "O Senhor é o meu pastor;de nada terei falta.",
+        "wordCount": 10,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/PSA.23.1"
+      }
+    },
+    "Jo 14:6": {
+      "NVI": {
+        "reference": "João 14:6",
+        "text": "Jesus respondeu:― Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai, a não ser por mim.",
+        "wordCount": 20,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/JHN.14.6"
+      },
+      "BLT": {
+        "reference": "João 14:6",
+        "text": "Jesus respondeu: “Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai, a não ser por mim.",
+        "wordCount": 20,
+        "youversionUrl": "https://www.bible.com/pt/bible/3254/JHN.14.6"
+      }
+    },
+    "Fp 4:13": {
+      "NVI": {
+        "reference": "Filipenses 4:13",
+        "text": "Tudo posso naquele que me fortalece.",
+        "wordCount": 6,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/PHP.4.13"
+      },
+      "BLT": {
+        "reference": "Filipenses 4:13",
+        "text": "Eu posso fazer qualquer coisa por meio de Cristo, pois ele me fortalece!",
+        "wordCount": 13,
+        "youversionUrl": "https://www.bible.com/pt/bible/3254/PHP.4.13"
+      }
+    },
+    "Sl 119:11": {
+      "NVI": {
+        "reference": "Salmos 119:11",
+        "text": "Guardei no coração a tua palavrapara não pecar contra ti.",
+        "wordCount": 10,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/PSA.119.11"
+      }
+    }
+  }
+}

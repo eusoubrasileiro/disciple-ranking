@@ -12,6 +12,7 @@ export interface Participant {
   id: number;
   name: string;
   points: number;
+  memorizedVerses?: string[];
 }
 
 export interface LeaderboardData {
