@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-12-28T01:23:46.482Z",
+  "generatedAt": "2025-12-28T17:23:20.280Z",
   "defaultVersion": "NVI",
   "versions": {
     "NVI": {
@@ -31,7 +31,7 @@
     "Sl 23:1": {
       "NVI": {
         "reference": "Salmos 23:1",
-        "text": "O Senhor é o meu pastor;de nada terei falta.",
+        "text": "O Senhor é o meu pastor; de nada terei falta.",
         "wordCount": 10,
         "youversionUrl": "https://www.bible.com/pt/bible/129/PSA.23.1"
       }
@@ -39,7 +39,7 @@
     "Jo 14:6": {
       "NVI": {
         "reference": "João 14:6",
-        "text": "Jesus respondeu:― Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai, a não ser por mim.",
+        "text": "Jesus respondeu: ― Eu sou o caminho, a verdade e a vida. Ninguém vem ao Pai, a não ser por mim.",
         "wordCount": 20,
         "youversionUrl": "https://www.bible.com/pt/bible/129/JHN.14.6"
       },
@@ -67,8 +67,8 @@
     "Sl 119:11": {
       "NVI": {
         "reference": "Salmos 119:11",
-        "text": "Guardei no coração a tua palavrapara não pecar contra ti.",
-        "wordCount": 10,
+        "text": "Guardei no coração a tua palavra para não pecar contra ti.",
+        "wordCount": 11,
         "youversionUrl": "https://www.bible.com/pt/bible/129/PSA.119.11"
       }
     }

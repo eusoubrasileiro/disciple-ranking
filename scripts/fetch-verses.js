@@ -3,7 +3,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { ApiClient, BibleClient } from '@youversion/platform-core';
-import striptags from 'striptags';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -123,49 +122,29 @@ function parseReference(ref) {
 
 /**
  * Count words in verse text (for point calculation)
- * Removes HTML tags, verse numbers, and punctuation
- * @param {string} htmlText - HTML text from YouVersion API
+ * Removes punctuation and counts words
+ * @param {string} text - Plain text from YouVersion API
  * @returns {number} - Word count
  */
-function countWords(htmlText) {
-  // Remove verse number labels (e.g., "16" in <span class="yv-vlbl">16</span>)
-  let text = htmlText.replace(/<span class="yv-vlbl">[^<]*<\/span>/g, '');
-
-  // Remove verse markers (e.g., <span class="yv-v" v="16"></span>)
-  text = text.replace(/<span class="yv-v"[^>]*><\/span>/g, '');
-
-  // Strip remaining HTML tags
-  text = striptags(text);
-
+function countWords(text) {
   // Remove punctuation, keep letters (including áéíóúãõçñ) and numbers
   // \p{L} matches any Unicode letter, \p{N} matches numbers
-  text = text.replace(/[^\p{L}\p{N}\s]/gu, ' ');
+  const cleanText = text.replace(/[^\p{L}\p{N}\s]/gu, ' ');
 
   // Split by whitespace and filter empty strings
-  const words = text.split(/\s+/).filter(w => w.length > 0);
+  const words = cleanText.split(/\s+/).filter(w => w.length > 0);
 
   return words.length;
 }
 
 /**
- * Clean verse text for storage (remove HTML, keep plain text)
- * @param {string} htmlText - HTML text from YouVersion API
+ * Clean verse text for storage (normalize whitespace)
+ * @param {string} text - Plain text from YouVersion API
  * @returns {string} - Clean plain text
  */
-function cleanVerseText(htmlText) {
-  // Remove verse number labels (e.g., "16" in <span class="yv-vlbl">16</span>)
-  let text = htmlText.replace(/<span class="yv-vlbl">[^<]*<\/span>/g, '');
-
-  // Remove verse markers (e.g., <span class="yv-v" v="16"></span>)
-  text = text.replace(/<span class="yv-v"[^>]*><\/span>/g, '');
-
-  // Strip all remaining HTML tags
-  text = striptags(text);
-
+function cleanVerseText(text) {
   // Normalize whitespace and trim
-  text = text.replace(/\s+/g, ' ').trim();
-
-  return text;
+  return text.replace(/\s+/g, ' ').trim();
 }
 
 /**
@@ -173,7 +152,7 @@ function cleanVerseText(htmlText) {
  */
 async function fetchVerse(bibleId, bibleAbbr, usfmRef, originalRef) {
   try {
-    const passage = await bibleClient.getPassage(bibleId, usfmRef);
+    const passage = await bibleClient.getPassage(bibleId, usfmRef, 'text');
 
     if (!passage || !passage.content) {
       return null;
@@ -185,7 +164,7 @@ async function fetchVerse(bibleId, bibleAbbr, usfmRef, originalRef) {
     return {
       reference: passage.reference || originalRef,
       text: cleanText,
-      wordCount: countWords(rawText),
+      wordCount: countWords(cleanText),
       youversionUrl: `https://www.bible.com/pt/bible/${bibleId}/${usfmRef}`
     };
   } catch (error) {

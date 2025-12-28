@@ -23,6 +23,22 @@ const Versiculos = () => {
   const loading = loadingLeaderboard || loadingVerses;
   const error = errorLeaderboard || (errorVerses ? 'Erro ao carregar versículos' : null);
 
+  // Helper function to calculate points based on word count
+  const calculateVersePoints = (wordCount: number): number => {
+    return wordCount >= 20 ? 35 : 25;
+  };
+
+  // Helper function to calculate total points for a participant's verses
+  const calculateTotalVersePoints = (verseRefs: string[]): number => {
+    return verseRefs.reduce((total, ref) => {
+      const verseData = versesData?.verses[ref]?.[selectedVersion];
+      if (verseData?.wordCount) {
+        return total + calculateVersePoints(verseData.wordCount);
+      }
+      return total;
+    }, 0);
+  };
+
   // Initialize selected version from localStorage or default
   useEffect(() => {
     if (versesData) {
@@ -222,6 +238,7 @@ const Versiculos = () => {
                   <div className="space-y-4">
                     {allUniqueVerses.map((ref, idx) => {
                       const verseData = versesData?.verses[ref]?.[selectedVersion];
+                      const points = verseData?.wordCount ? calculateVersePoints(verseData.wordCount) : null;
                       return (
                         <div
                           key={idx}
@@ -237,7 +254,7 @@ const Versiculos = () => {
                               </p>
                               <div className="flex items-center justify-between pt-2 border-t">
                                 <span className="text-sm text-muted-foreground">
-                                  {verseData.wordCount} palavras
+                                  {verseData.wordCount} palavras • <span className="text-accent font-semibold">+{points} pts</span>
                                 </span>
                                 <a
                                   href={verseData.youversionUrl}
@@ -283,24 +300,34 @@ const Versiculos = () => {
                           <h3 className="text-lg font-semibold text-primary">
                             {participant.name}
                           </h3>
-                          <span className="text-sm text-muted-foreground">
-                            {participant.memorizedVerses?.length || 0} versículo(s)
-                          </span>
+                          <div className="flex items-center gap-2 text-sm">
+                            <span className="text-muted-foreground">
+                              {participant.memorizedVerses?.length || 0} versículo(s)
+                            </span>
+                            <span className="text-muted-foreground">•</span>
+                            <span className="font-semibold text-accent">
+                              +{calculateTotalVersePoints(participant.memorizedVerses || [])} pts
+                            </span>
+                          </div>
                         </div>
 
                         {viewMode === 'compact' ? (
                           <div className="flex flex-wrap gap-2">
                             {participant.memorizedVerses?.map((ref, idx) => {
                               const verseData = versesData?.verses[ref]?.[selectedVersion];
+                              const points = verseData?.wordCount ? calculateVersePoints(verseData.wordCount) : null;
                               return (
                                 <a
                                   key={idx}
                                   href={verseData?.youversionUrl || '#'}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/30 text-accent hover:bg-accent hover:text-accent-foreground transition-colors text-sm font-medium"
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/30 text-accent hover:bg-accent hover:text-accent-foreground transition-colors text-sm font-medium"
                                 >
-                                  {ref}
+                                  <span>{ref}</span>
+                                  {points && (
+                                    <span className="text-xs opacity-80">+{points}</span>
+                                  )}
                                   <ExternalLink className="w-3 h-3" />
                                 </a>
                               );
@@ -310,10 +337,16 @@ const Versiculos = () => {
                           <Accordion type="multiple" className="space-y-2">
                             {participant.memorizedVerses?.map((ref, idx) => {
                               const verseData = versesData?.verses[ref]?.[selectedVersion];
+                              const points = verseData?.wordCount ? calculateVersePoints(verseData.wordCount) : null;
                               return (
                                 <AccordionItem key={idx} value={`verse-${idx}`} className="border border-border rounded-lg overflow-hidden">
                                   <AccordionTrigger className="px-4 hover:bg-muted/50">
-                                    <span className="font-medium text-accent">{verseData?.reference || ref}</span>
+                                    <div className="flex items-center gap-2 w-full">
+                                      <span className="font-medium text-accent">{verseData?.reference || ref}</span>
+                                      {points && (
+                                        <span className="text-xs text-accent/70">+{points} pts</span>
+                                      )}
+                                    </div>
                                   </AccordionTrigger>
                                   <AccordionContent className="px-4 bg-muted/20">
                                     {verseData ? (
@@ -321,15 +354,20 @@ const Versiculos = () => {
                                         <p className="text-foreground leading-relaxed italic">
                                           "{verseData.text}"
                                         </p>
-                                        <a
-                                          href={verseData.youversionUrl}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="inline-flex items-center gap-1 text-sm text-accent hover:underline"
-                                        >
-                                          Ver no YouVersion
-                                          <ExternalLink className="w-3 h-3" />
-                                        </a>
+                                        <div className="flex items-center justify-between pt-2 border-t">
+                                          <span className="text-sm text-muted-foreground">
+                                            {verseData.wordCount} palavras • <span className="text-accent font-semibold">+{points} pts</span>
+                                          </span>
+                                          <a
+                                            href={verseData.youversionUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-1 text-sm text-accent hover:underline"
+                                          >
+                                            Ver no YouVersion
+                                            <ExternalLink className="w-3 h-3" />
+                                          </a>
+                                        </div>
                                       </div>
                                     ) : (
                                       <p className="text-muted-foreground text-sm">
