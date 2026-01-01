@@ -13,7 +13,7 @@
   "participants": [
     { "id": 1, "name": "Arthur", "points": 177, "memorizedVerses": ["Jo 3:16", "Sl 23:1", "Jo 14:6", "Fp 4:13"] }, 
     { "id": 2, "name": "Daniel", "points": 80, "memorizedVerses": ["Jo 3:16"] }, 
-    { "id": 3, "name": "Richarlyson", "points": 130, "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 119:11"] }, 
+    { "id": 3, "name": "Richarlyson", "points": 180, "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 119:11"], "visitors": ["Kelly", "tio Marcos"] }, 
     { "id": 4, "name": "Miguel", "points": 35 },
     { "id": 5, "name": "Felipe", "points": 62, "memorizedVerses": ["Sl 23:1"] }, 
     { "id": 6, "name": "Caio", "points": 105, "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 23:1"] }, 
