@@ -8,7 +8,8 @@
     { "id": 4, "description": "Decorar versículo (<20 palavras)", "points": 25, "icon": "BookOpen", "explanation": "Aceita-se trocar uma palavra por outra com mesmo significado desde que saiba referência" },
     { "id": 5, "description": "Decorar versículo (>=20 palavras)", "points": 35, "icon": "BookOpen", "explanation": "Aceita-se trocar uma palavra por outra com mesmo significado desde que saiba referência" },    
     { "id": 6, "description": "Pre-requisitos Candidato", "points": 55, "icon": "BadgeCheck" },
-    { "id": 7, "description": "Tarefa Manual Candidato", "points": 55, "icon": "BadgeCheck" }
+    { "id": 7, "description": "Tarefa Manual Candidato", "points": 55, "icon": "BadgeCheck" },
+    { "id": 8, "description": "Disciplina", "points": -10, "icon": "AlertTriangle", "explanation": "Cristãos da igreja: -10pts | Não cristãos: -5pts | Cristãos de fora: -7pts" }
   ],
   "participants": [
     { "id": 1, "name": "Arthur", "points": 177, "memorizedVerses": ["Jo 3:16", "Sl 23:1", "Jo 14:6", "Fp 4:13"] }, 

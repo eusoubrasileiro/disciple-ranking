@@ -1,4 +1,4 @@
-import { Trophy, Plus, Church, Crown, UserPlus, BookOpen, BadgeCheck, HelpCircle } from 'lucide-react';
+import { Trophy, Plus, Church, Crown, UserPlus, BookOpen, BadgeCheck, HelpCircle, AlertTriangle } from 'lucide-react';
 import type { Rule } from '@/hooks/useLeaderboardData';
 import type { LucideIcon } from 'lucide-react';
 import {
@@ -19,6 +19,7 @@ export function RulesSection({ rules }: RulesSectionProps) {
     UserPlus,
     BookOpen,
     BadgeCheck,
+    AlertTriangle,
     Plus, // fallback
   };
 
@@ -62,8 +63,12 @@ export function RulesSection({ rules }: RulesSectionProps) {
                       </Popover>
                     )}
                   </div>
-                  <div className="flex-shrink-0 px-3 py-1.5 rounded-lg bg-accent text-accent-foreground font-bold text-sm">
-                    +{rule.points}
+                  <div className={`flex-shrink-0 px-3 py-1.5 rounded-lg font-bold text-sm ${
+                    rule.points < 0
+                      ? 'bg-destructive/20 text-destructive'
+                      : 'bg-accent text-accent-foreground'
+                  }`}>
+                    {rule.points < 0 ? rule.points : `+${rule.points}`}
                   </div>
                 </div>
               );
