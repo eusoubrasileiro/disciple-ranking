@@ -1,7 +1,7 @@
 {
   "versions": [
     { "abbreviation": "NVI", "name": "Nova Versão Internacional", "id": 129, "priority": 1 },
-    { "abbreviation": "BLT", "name": "Bíblia Livre Para Todos", "id": 3254, "priority": 2 }
+    { "abbreviation": "NBV", "name": "Nova Bíblia Viva", "id": 1966, "priority": 2 }
   ],
   "defaultVersion": "NVI"
 }
