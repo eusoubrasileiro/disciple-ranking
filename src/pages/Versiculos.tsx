@@ -23,20 +23,54 @@ const Versiculos = () => {
   const loading = loadingLeaderboard || loadingVerses;
   const error = errorLeaderboard || (errorVerses ? 'Erro ao carregar versículos' : null);
 
+  // Helper function to check if a reference is a verse range
+  const isVerseRange = (ref: string): boolean => {
+    return /^([1-3]?\s?[A-Za-zÀ-ÿ]+)\s+(\d+):(\d+)-(\d+)$/.test(ref.trim());
+  };
+
+  // Helper function to expand a verse range into individual references
+  const expandVerseRange = (ref: string): string[] => {
+    const match = ref.trim().match(/^([1-3]?\s?[A-Za-zÀ-ÿ]+)\s+(\d+):(\d+)-(\d+)$/);
+    if (!match) return [ref];
+
+    const [, book, chapter, startVerse, endVerse] = match;
+    const start = parseInt(startVerse, 10);
+    const end = parseInt(endVerse, 10);
+
+    if (start > end) return [ref];
+
+    const verses: string[] = [];
+    for (let v = start; v <= end; v++) {
+      verses.push(`${book} ${chapter}:${v}`);
+    }
+    return verses;
+  };
+
   // Helper function to calculate points based on word count
   const calculateVersePoints = (wordCount: number): number => {
     return wordCount >= 20 ? 35 : 25;
   };
 
+  // Helper function to calculate points for a single reference (handles ranges)
+  const calculateRefPoints = (ref: string): number => {
+    const expanded = expandVerseRange(ref);
+    return expanded.reduce((sum, singleRef) => {
+      const verseData = versesData?.verses[singleRef]?.[selectedVersion];
+      if (verseData?.wordCount) {
+        return sum + calculateVersePoints(verseData.wordCount);
+      }
+      return sum;
+    }, 0);
+  };
+
   // Helper function to calculate total points for a participant's verses
   const calculateTotalVersePoints = (verseRefs: string[]): number => {
-    return verseRefs.reduce((total, ref) => {
-      const verseData = versesData?.verses[ref]?.[selectedVersion];
-      if (verseData?.wordCount) {
-        return total + calculateVersePoints(verseData.wordCount);
-      }
-      return total;
-    }, 0);
+    return verseRefs.reduce((total, ref) => total + calculateRefPoints(ref), 0);
+  };
+
+  // Helper function to count total individual verses (expanding ranges)
+  const countTotalVerses = (verseRefs: string[]): number => {
+    return verseRefs.reduce((count, ref) => count + expandVerseRange(ref).length, 0);
   };
 
   // Initialize selected version from localStorage or default
@@ -73,11 +107,12 @@ const Versiculos = () => {
       return a.name.localeCompare(b.name);
     }) || [];
 
-  // Get all unique verses for "all verses" view
+  // Get all unique verses for "all verses" view (expanding ranges)
   const allUniqueVerses = Array.from(
     new Set(
       leaderboardData?.participants
         .flatMap(p => p.memorizedVerses || [])
+        .flatMap(ref => expandVerseRange(ref))
     )
   ).sort();
 
@@ -302,7 +337,7 @@ const Versiculos = () => {
                           </h3>
                           <div className="flex items-center gap-2 text-sm">
                             <span className="text-muted-foreground">
-                              {participant.memorizedVerses?.length || 0} versículo(s)
+                              {countTotalVerses(participant.memorizedVerses || [])} versículo(s)
                             </span>
                             <span className="text-muted-foreground">•</span>
                             <span className="font-semibold text-accent">
@@ -314,18 +349,21 @@ const Versiculos = () => {
                         {viewMode === 'compact' ? (
                           <div className="flex flex-wrap gap-2">
                             {participant.memorizedVerses?.map((ref, idx) => {
-                              const verseData = versesData?.verses[ref]?.[selectedVersion];
-                              const points = verseData?.wordCount ? calculateVersePoints(verseData.wordCount) : null;
+                              const range = isVerseRange(ref);
+                              const points = calculateRefPoints(ref);
+                              const expanded = expandVerseRange(ref);
+                              const firstVerseData = versesData?.verses[expanded[0]]?.[selectedVersion];
                               return (
                                 <a
                                   key={idx}
-                                  href={verseData?.youversionUrl || '#'}
+                                  href={firstVerseData?.youversionUrl || '#'}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/30 text-accent hover:bg-accent hover:text-accent-foreground transition-colors text-sm font-medium"
+                                  title={range ? `${expanded.length} versículos` : undefined}
                                 >
                                   <span>{ref}</span>
-                                  {points && (
+                                  {points > 0 && (
                                     <span className="text-xs opacity-80">+{points}</span>
                                   )}
                                   <ExternalLink className="w-3 h-3" />
@@ -336,6 +374,69 @@ const Versiculos = () => {
                         ) : (
                           <Accordion type="multiple" className="space-y-2">
                             {participant.memorizedVerses?.map((ref, idx) => {
+                              const range = isVerseRange(ref);
+                              const expanded = expandVerseRange(ref);
+                              const totalPoints = calculateRefPoints(ref);
+
+                              if (range) {
+                                // Render verse range with breakdown
+                                return (
+                                  <AccordionItem key={idx} value={`verse-${idx}`} className="border border-border rounded-lg overflow-hidden">
+                                    <AccordionTrigger className="px-4 hover:bg-muted/50">
+                                      <div className="flex items-center gap-2 w-full">
+                                        <span className="font-medium text-accent">{ref}</span>
+                                        <span className="text-xs text-muted-foreground">({expanded.length} versículos)</span>
+                                        <span className="text-xs text-accent/70">+{totalPoints} pts</span>
+                                      </div>
+                                    </AccordionTrigger>
+                                    <AccordionContent className="px-4 bg-muted/20">
+                                      <div className="space-y-4">
+                                        {expanded.map((singleRef, vIdx) => {
+                                          const verseData = versesData?.verses[singleRef]?.[selectedVersion];
+                                          const points = verseData?.wordCount ? calculateVersePoints(verseData.wordCount) : null;
+                                          return (
+                                            <div key={vIdx} className={vIdx > 0 ? "pt-3 border-t border-border/50" : ""}>
+                                              <div className="flex items-center justify-between mb-2">
+                                                <span className="text-sm font-medium text-accent/80">
+                                                  {verseData?.reference || singleRef}
+                                                </span>
+                                                {points && (
+                                                  <span className="text-xs text-accent/70">+{points} pts</span>
+                                                )}
+                                              </div>
+                                              {verseData ? (
+                                                <div className="space-y-2">
+                                                  <p className="text-foreground leading-relaxed italic text-sm">
+                                                    "{verseData.text}"
+                                                  </p>
+                                                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                                                    <span>{verseData.wordCount} palavras</span>
+                                                    <a
+                                                      href={verseData.youversionUrl}
+                                                      target="_blank"
+                                                      rel="noopener noreferrer"
+                                                      className="inline-flex items-center gap-1 text-accent hover:underline"
+                                                    >
+                                                      YouVersion
+                                                      <ExternalLink className="w-3 h-3" />
+                                                    </a>
+                                                  </div>
+                                                </div>
+                                              ) : (
+                                                <p className="text-muted-foreground text-sm">
+                                                  Texto não disponível
+                                                </p>
+                                              )}
+                                            </div>
+                                          );
+                                        })}
+                                      </div>
+                                    </AccordionContent>
+                                  </AccordionItem>
+                                );
+                              }
+
+                              // Render single verse
                               const verseData = versesData?.verses[ref]?.[selectedVersion];
                               const points = verseData?.wordCount ? calculateVersePoints(verseData.wordCount) : null;
                               return (

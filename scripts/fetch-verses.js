@@ -92,20 +92,61 @@ const ptToUsfm = {
 };
 
 /**
- * Parse Portuguese Bible reference to USFM format
- * @param {string} ref - e.g., "Jo 3:16" or "1Co 13:4-8"
+ * Check if a reference is a verse range
+ * @param {string} ref - e.g., "Jo 3:16" or "Mt 6:9-13" or "2 Pe 1:1-3"
+ * @returns {boolean}
+ */
+function isVerseRange(ref) {
+  return /^([1-3]?\s?[A-Za-zÀ-ÿ]+)\s+(\d+):(\d+)-(\d+)$/.test(ref.trim());
+}
+
+/**
+ * Expand a verse range into individual verse references
+ * @param {string} ref - e.g., "Mt 6:9-13" or "2 Pe 1:1-3"
+ * @returns {string[]} - e.g., ["Mt 6:9", "Mt 6:10", "Mt 6:11", "Mt 6:12", "Mt 6:13"]
+ */
+function expandVerseRange(ref) {
+  const match = ref.trim().match(/^([1-3]?\s?[A-Za-zÀ-ÿ]+)\s+(\d+):(\d+)-(\d+)$/);
+
+  if (!match) {
+    return [ref]; // Not a range, return as-is
+  }
+
+  const [, book, chapter, startVerse, endVerse] = match;
+  const start = parseInt(startVerse, 10);
+  const end = parseInt(endVerse, 10);
+
+  if (start > end) {
+    console.warn(`⚠️  Invalid verse range: "${ref}" (start > end)`);
+    return [ref];
+  }
+
+  const verses = [];
+  for (let v = start; v <= end; v++) {
+    verses.push(`${book} ${chapter}:${v}`);
+  }
+
+  return verses;
+}
+
+/**
+ * Parse Portuguese Bible reference to USFM format (single verse only)
+ * @param {string} ref - e.g., "Jo 3:16" or "2 Pe 1:21"
  * @returns {string|null} - e.g., "JHN.3.16" or null if invalid
  */
 function parseReference(ref) {
-  // Match pattern: Book Chapter:Verse or Book Chapter:Verse-Verse
-  const match = ref.trim().match(/^([1-3]?[A-Za-zÀ-ÿ]+)\s+(\d+):(\d+)(?:-(\d+))?$/);
+  // Match pattern: Book Chapter:Verse (single verse only)
+  // Allows optional space after book number (e.g., "2 Pe" or "2Pe")
+  const match = ref.trim().match(/^([1-3]?\s?[A-Za-zÀ-ÿ]+)\s+(\d+):(\d+)$/);
 
   if (!match) {
     console.warn(`⚠️  Invalid reference format: "${ref}"`);
     return null;
   }
 
-  const [, book, chapter, verseStart, verseEnd] = match;
+  const [, bookRaw, chapter, verse] = match;
+  // Normalize book name by removing internal spaces (e.g., "2 Pe" -> "2Pe")
+  const book = bookRaw.replace(/\s+/g, '');
   const usfmBook = ptToUsfm[book];
 
   if (!usfmBook) {
@@ -113,11 +154,7 @@ function parseReference(ref) {
     return null;
   }
 
-  if (verseEnd) {
-    return `${usfmBook}.${chapter}.${verseStart}-${usfmBook}.${chapter}.${verseEnd}`;
-  }
-
-  return `${usfmBook}.${chapter}.${verseStart}`;
+  return `${usfmBook}.${chapter}.${verse}`;
 }
 
 /**
@@ -189,13 +226,25 @@ async function main() {
   const leaderboardPath = path.join(__dirname, '..', 'public', 'data', 'leaderboard.json');
   const leaderboardData = JSON.parse(fs.readFileSync(leaderboardPath, 'utf-8'));
 
-  // Extract unique verse references
-  const allRefs = new Set();
+  // Extract unique verse references and expand ranges
+  const originalRefs = new Set();
   leaderboardData.participants.forEach(participant => {
     if (participant.memorizedVerses && Array.isArray(participant.memorizedVerses)) {
-      participant.memorizedVerses.forEach(ref => allRefs.add(ref));
+      participant.memorizedVerses.forEach(ref => originalRefs.add(ref));
     }
   });
+
+  // Expand all ranges into individual verses
+  const allRefs = new Set();
+  for (const ref of originalRefs) {
+    if (isVerseRange(ref)) {
+      const expanded = expandVerseRange(ref);
+      console.log(`  📋 Expanding range: ${ref} → ${expanded.length} verses`);
+      expanded.forEach(v => allRefs.add(v));
+    } else {
+      allRefs.add(ref);
+    }
+  }
 
   if (allRefs.size === 0) {
     console.log('ℹ️  No verses to fetch. Creating empty verses.json');
@@ -266,14 +315,60 @@ async function main() {
     totalFetched += Object.keys(verseVersions).length;
   }
 
-  // Print word count report
+  // ANSI color codes
+  const colors = {
+    reset: '\x1b[0m',
+    bold: '\x1b[1m',
+    dim: '\x1b[2m',
+    green: '\x1b[32m',
+    yellow: '\x1b[33m',
+    blue: '\x1b[34m',
+    magenta: '\x1b[35m',
+    cyan: '\x1b[36m',
+    bgGreen: '\x1b[42m',
+    bgYellow: '\x1b[43m',
+  };
+
+  // Version colors (cycle through for multiple versions)
+  const versionColors = [colors.cyan, colors.magenta, colors.yellow, colors.green, colors.blue];
+
+  // Print word count report - side by side
   console.log('\n📊 Word Count Report:\n');
-  for (const [ref, versions] of Object.entries(verses)) {
-    for (const [abbr, verseData] of Object.entries(versions)) {
-      const threshold = verseData.wordCount >= 20 ? '≥20' : '<20';
-      console.log(`  ${ref} (${abbr}): ${verseData.wordCount} words (${threshold})`);
-    }
+
+  // Header with version names
+  const versionAbbrs = Object.keys(bibleVersions);
+  const refWidth = 16;
+  let header = `  ${'Referência'.padEnd(refWidth)}`;
+  versionAbbrs.forEach((abbr, idx) => {
+    const color = versionColors[idx % versionColors.length];
+    header += ` │ ${color}${abbr.padEnd(12)}${colors.reset}`;
+  });
+  console.log(header);
+  console.log(`  ${'─'.repeat(refWidth)}${'─┼─────────────'.repeat(versionAbbrs.length)}`);
+
+  // Print each verse with all versions side by side
+  for (const [ref, versionData] of Object.entries(verses)) {
+    let line = `  ${colors.bold}${ref.padEnd(refWidth)}${colors.reset}`;
+
+    versionAbbrs.forEach((abbr, idx) => {
+      const color = versionColors[idx % versionColors.length];
+      const data = versionData[abbr];
+
+      if (data) {
+        const words = data.wordCount;
+        const icon = words >= 20 ? '█' : '·';
+        const pts = words >= 20 ? '35' : '25';
+        line += ` │ ${color}${icon} ${String(words).padStart(2)}w ${colors.dim}+${pts}${colors.reset}`;
+      } else {
+        line += ` │ ${colors.dim}   ──    ${colors.reset}`;
+      }
+    });
+
+    console.log(line);
   }
+
+  // Legend
+  console.log(`\n  ${colors.dim}Legenda: █ ≥20 palavras (+35pts) │ · <20 palavras (+25pts)${colors.reset}`);
 
   console.log(`\n✅ Successfully fetched ${totalFetched} verse(s) across ${Object.keys(bibleVersions).length} version(s)`);
   console.log(`📝 Written to: ${outputPath}`);
