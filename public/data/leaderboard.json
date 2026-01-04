@@ -2,7 +2,7 @@
   "season": "2026",
   "updatedAt": "2025-12-21T10:30:00",
   "rules": [
-    { "id": 1, "description": "Participar Compromissos da Igreja", "points": 2, "icon": "Church", "explanation": "Beneficia a participação de pessoas não cristãs e não-membros da igreja." },
+    { "id": 1, "description": "Participar Compromissos da Igreja", "points": 5, "icon": "Church", "explanation": "Beneficia a participação de pessoas não cristãs e não-membros da igreja." },
     { "id": 2, "description": "Participar da Embaixada", "points": 10, "icon": "Crown" },
     { "id": 3, "description": "Trazer visitante", "points": 25, "icon": "UserPlus", "explanation": "No culto: Foco em não cristãos ou desviados. Embaixada: qualquer visitante." },
     { "id": 4, "description": "Decorar versículo (<20 palavras)", "points": 25, "icon": "BookOpen", "explanation": "Aceita-se trocar uma palavra por outra com mesmo significado desde que saiba referência" },
