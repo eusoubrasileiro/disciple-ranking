@@ -48,7 +48,8 @@
         { "date": "2026-01-05", "type": "igreja" },
         { "date": "2026-01-08", "type": "igreja" },
         { "date": "2026-01-04", "type": "igreja" },
-        { "date": "2026-01-04", "type": "igreja" }
+        { "date": "2026-01-04", "type": "igreja" },
+        { "date": "2026-01-07", "type": "igreja" }
       ]
     },
     {
@@ -75,7 +76,8 @@
         { "date": "2025-12-28", "type": "igreja" },
         { "date": "2026-01-03", "type": "embaixada" },
         { "date": "2026-01-04", "type": "igreja" },
-        { "date": "2026-01-04", "type": "igreja" }
+        { "date": "2026-01-04", "type": "igreja" },
+        { "date": "2026-01-07", "type": "igreja" }
       ],
       "visitors": ["Davi"]
     },
