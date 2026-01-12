@@ -17,7 +17,9 @@
         { "date": "2026-01-08", "type": "igreja" },
         { "date": "2026-01-04", "type": "igreja" },
         { "date": "2026-01-04", "type": "igreja" },
-        { "date": "2026-01-10", "type": "embaixada" }
+        { "date": "2026-01-10", "type": "embaixada" },
+        { "date": "2026-01-11", "type": "igreja" },
+        { "date": "2026-01-11", "type": "igreja" }
       ],
       "visitors": ["Davi"],
       "candidatoProgress": { "prerequisites": true, "manualTasks": 0 }
@@ -32,7 +34,8 @@
         { "date": "2025-12-27", "type": "embaixada" },
         { "date": "2025-12-28", "type": "igreja" },
         { "date": "2026-01-04", "type": "igreja" },
-        { "date": "2026-01-10", "type": "embaixada" }      
+        { "date": "2026-01-10", "type": "embaixada" },
+        { "date": "2026-01-11", "type": "igreja" }
       ],
       "candidatoProgress": { "prerequisites": true, "manualTasks": 0 }
     },
@@ -84,6 +87,7 @@
         { "date": "2026-01-04", "type": "igreja" },
         { "date": "2026-01-07", "type": "igreja" },
         { "date": "2026-01-10", "type": "embaixada" },
+        { "date": "2026-01-11", "type": "igreja" },
         { "date": "2026-01-11", "type": "igreja" }
       ],
       "visitors": ["Davi"]
