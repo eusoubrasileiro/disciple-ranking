@@ -5,7 +5,7 @@
     {
       "id": 1,
       "name": "Arthur",
-      "memorizedVerses": ["Jo 3:16", "Sl 23:1", "Jo 14:6", "Fp 4:13", "2 Pe 1:21", "Sl 119:11", "Mt 6:9-13", "Sl 91:1", "Jó 3:2"],
+      "memorizedVerses": ["Jo 3:16", "Sl 23:1", "Jo 14:6", "Fp 4:13", "2 Pe 1:21", "Sl 119:11", "Mt 6:9-13", "Sl 91:1", "Jó 3:2", "Jo 11:35", "Sl 23:2", "Jo 1:1"],
       "attendance": [
         { "date": "2025-12-21", "type": "embaixada" },
         { "date": "2025-12-21", "type": "igreja" },
@@ -19,31 +19,37 @@
         { "date": "2026-01-04", "type": "igreja" },
         { "date": "2026-01-10", "type": "embaixada" },
         { "date": "2026-01-11", "type": "igreja" },
-        { "date": "2026-01-11", "type": "igreja" }
+        { "date": "2026-01-11", "type": "igreja" },
+        { "date": "2026-01-21", "type": "igreja" },
+        { "date": "2026-01-22", "type": "embaixada" },
+        { "date": "2026-01-22", "type": "pg" },
+        { "date": "2026-01-25", "type": "igreja" }
       ],
-      "visitors": ["Davi"],
+      "visitors": ["Davi", "Pedro"],
       "candidatoProgress": { "prerequisites": true, "manualTasks": 0 }
     },
     {
       "id": 2,
       "name": "Daniel",
       "startPoints": 15,
-      "memorizedVerses": ["Jo 3:16", "Gn 1:1", "Sl 23:1", "Mt 6:9-13", "Sl 1:1-6"],
+      "memorizedVerses": ["Jo 3:16", "Gn 1:1", "Sl 23:1", "Mt 6:9-13", "Sl 1:1-6", "Fp 4:13", "Jó 3:2"],
       "attendance": [
         { "date": "2025-12-21", "type": "igreja" },
         { "date": "2025-12-27", "type": "embaixada" },
         { "date": "2025-12-28", "type": "igreja" },
         { "date": "2026-01-04", "type": "igreja" },
         { "date": "2026-01-10", "type": "embaixada" },
-        { "date": "2026-01-11", "type": "igreja" }
+        { "date": "2026-01-11", "type": "igreja" },
+        { "date": "2026-01-22", "type": "embaixada" },
+        { "date": "2026-01-25", "type": "igreja" }        
       ],
       "candidatoProgress": { "prerequisites": true, "manualTasks": 0 }
     },
     {
       "id": 3,
       "name": "Richarlyson",
-      "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 119:11", "Sl 119:103", "Sl 32:8-9", "Gn 1:1", "Gn 1:3", "Jó 3:2", "Mt 6:9-13"],
-      "visitors": ["tia Sarah", "tio Walaf", "tio Marco", "Kelly namorada do Marco"],
+      "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 119:11", "Sl 119:103", "Sl 32:8-9", "Gn 1:1", "Gn 1:3", "Jó 3:2", "Mt 6:9-13", "Sl 23:1", "Jo 11:35", "Ex 20:13-16", "Jo 6:48", "Jo 8:1"],
+      "visitors": ["tia Sarah", "tio Walaf", "tio Marco", "Kelly namorada do Marco", "Pedro"],
       "attendance": [
         { "date": "2025-12-21", "type": "embaixada" },
         { "date": "2025-12-21", "type": "igreja" },
@@ -56,7 +62,10 @@
         { "date": "2026-01-04", "type": "igreja" },
         { "date": "2026-01-07", "type": "igreja" },
         { "date": "2026-01-10", "type": "embaixada" },
-        { "date": "2026-01-11", "type": "igreja" }
+        { "date": "2026-01-11", "type": "igreja" },
+        { "date": "2026-01-22", "type": "embaixada" },
+        { "date": "2026-01-22", "type": "pg" },
+        { "date": "2026-01-25", "type": "igreja" }
       ]
     },
     {
@@ -69,14 +78,15 @@
         { "date": "2025-12-27", "type": "embaixada" },
         { "date": "2025-12-28", "type": "igreja" },
         { "date": "2026-01-03", "type": "embaixada" },
-        { "date": "2026-01-10", "type": "embaixada" }
+        { "date": "2026-01-10", "type": "embaixada" },
+        { "date": "2026-01-25", "type": "igreja" }
       ],
       "visitors": ["primo Davi"]
     },
     {
       "id": 5,
       "name": "Felipe",
-      "memorizedVerses": ["Sl 23:1", "Fp 4:13", "Jó 3:2", "Jo 6:4", "Mt 6:9-13"],
+      "memorizedVerses": ["Sl 23:1", "Fp 4:13", "Jó 3:2", "Jo 6:4", "Mt 6:9-13", "Jo 6:48"],
       "attendance": [
         { "date": "2025-12-21", "type": "embaixada" },
         { "date": "2025-12-21", "type": "igreja" },
@@ -88,17 +98,22 @@
         { "date": "2026-01-07", "type": "igreja" },
         { "date": "2026-01-10", "type": "embaixada" },
         { "date": "2026-01-11", "type": "igreja" },
-        { "date": "2026-01-11", "type": "igreja" }
+        { "date": "2026-01-11", "type": "igreja" },
+        { "date": "2026-01-22", "type": "embaixada"},
+        { "date": "2026-01-22", "type": "pg" },
+        { "date": "2026-01-25", "type": "igreja" }
       ],
       "visitors": ["Davi"]
     },
     {
       "id": 6,
       "name": "Caio",
-      "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 23:1"],
+      "memorizedVerses": ["Jo 3:16", "Fp 4:13", "Sl 23:1", "Jo 6:48", "Mt 6:9-13", "Jó 3:2"],
       "attendance": [
         { "date": "2025-12-27", "type": "embaixada" },
-        { "date": "2026-01-03", "type": "embaixada" }
+        { "date": "2026-01-03", "type": "embaixada" },
+        { "date": "2026-01-22", "type": "embaixada" },
+        { "date": "2026-01-22", "type": "pg" }
       ]
     },
     {
@@ -111,15 +126,19 @@
     {
       "id": 8,
       "name": "João",
-      "attendance": [
-        { "date": "2025-12-21", "type": "embaixada" }
+      "memorizedVerses": ["Jó 3:2", "Jo 8:12", "Sl 23:1", "Fp 4:13"],
+      "attendance": [        
+        { "date": "2025-12-21", "type": "embaixada" },
+        { "date": "2026-01-22", "type": "embaixada" },
+        { "date": "2026-01-22", "type": "pg" }
       ]
     },
     {
       "id": 9,
       "name": "Kaique",
       "attendance": [
-        { "date": "2025-12-27", "type": "embaixada" }
+        { "date": "2025-12-27", "type": "embaixada" },
+        { "date": "2026-01-22", "type": "pg" }
       ]
     },
     {
@@ -128,6 +147,25 @@
       "attendance": [
         { "date": "2026-01-03", "type": "embaixada" }
       ]
+    },
+    {
+      "id": 11,
+      "name": "Pedro",
+      "memorizedVerses": ["Jó 3:2", "Fp 4:13"],
+      "attendance": [
+        { "date": "2026-01-22", "type": "embaixada" },
+        { "date": "2026-01-22", "type": "pg" },
+        { "date": "2026-01-25", "type": "igreja" }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Leandro",
+      "memorizedVerses": ["Mt 6:9-13", "Jó 3:2", "Jo 11:35", "Jo 6:48"],
+      "attendance": [
+        { "date": "2026-01-22", "type": "embaixada" }
+      ]
     }
+
   ]
 }

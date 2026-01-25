@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-01-04T01:49:26.867Z",
+  "generatedAt": "2026-01-25T18:14:41.332Z",
   "defaultVersion": "NVI",
   "versions": {
     "NVI": {
@@ -84,18 +84,18 @@
         "youversionUrl": "https://www.bible.com/pt/bible/1966/2PE.1.21"
       }
     },
-    "Gn 1:1": {
+    "Sl 119:11": {
       "NVI": {
-        "reference": "Gênesis 1:1",
-        "text": "No princípio, Deus criou os céus e a terra.",
-        "wordCount": 9,
-        "youversionUrl": "https://www.bible.com/pt/bible/129/GEN.1.1"
+        "reference": "Salmos 119:11",
+        "text": "Guardei no coração a tua palavra para não pecar contra ti.",
+        "wordCount": 11,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/PSA.119.11"
       },
       "NBV": {
-        "reference": "Gênesis 1:1",
-        "text": "No princípio Deus criou os céus e a terra.",
-        "wordCount": 9,
-        "youversionUrl": "https://www.bible.com/pt/bible/1966/GEN.1.1"
+        "reference": "Salmos 119:11",
+        "text": "Suas palavras estão sempre presentes em meu coração para não pecar contra o Senhor.",
+        "wordCount": 14,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/PSA.119.11"
       }
     },
     "Mt 6:9": {
@@ -166,6 +166,90 @@
         "text": "Não nos deixe cair em tentação, mas livre-nos do Maligno. Amém!’",
         "wordCount": 12,
         "youversionUrl": "https://www.bible.com/pt/bible/1966/MAT.6.13"
+      }
+    },
+    "Sl 91:1": {
+      "NVI": {
+        "reference": "Salmos 91:1",
+        "text": "Aquele que habita no abrigo do Altíssimo descansará à sombra do Todo-poderoso.",
+        "wordCount": 13,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/PSA.91.1"
+      },
+      "NBV": {
+        "reference": "Salmos 91:1",
+        "text": "Aquele que vive protegido pelo Altíssimo, guardado pelo Todo-poderoso,",
+        "wordCount": 10,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/PSA.91.1"
+      }
+    },
+    "Jó 3:2": {
+      "NVI": {
+        "reference": "Jó 3:2",
+        "text": "Ele disse:",
+        "wordCount": 2,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/JOB.3.2"
+      },
+      "NBV": {
+        "reference": "Jó 3:2",
+        "text": "Jó disse:",
+        "wordCount": 2,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/JOB.3.2"
+      }
+    },
+    "Jo 11:35": {
+      "NVI": {
+        "reference": "João 11:35",
+        "text": "Jesus chorou.",
+        "wordCount": 2,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/JHN.11.35"
+      },
+      "NBV": {
+        "reference": "João 11:35",
+        "text": "Jesus chorou.",
+        "wordCount": 2,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/JHN.11.35"
+      }
+    },
+    "Sl 23:2": {
+      "NVI": {
+        "reference": "Salmos 23:2",
+        "text": "Ele me faz repousar em pastagens verdejantes e me conduz a águas tranquilas;",
+        "wordCount": 13,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/PSA.23.2"
+      },
+      "NBV": {
+        "reference": "Salmos 23:2",
+        "text": "Ele me leva aos pastos de grama verde e macia para descansar. Quando sinto sede, ele me leva para os riachos de águas mansas.",
+        "wordCount": 24,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/PSA.23.2"
+      }
+    },
+    "Jo 1:1": {
+      "NVI": {
+        "reference": "João 1:1",
+        "text": "No princípio era a Palavra, e a Palavra estava com Deus e a Palavra era Deus.",
+        "wordCount": 16,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/JHN.1.1"
+      },
+      "NBV": {
+        "reference": "João 1:1",
+        "text": "No princípio era aquele que é a Palavra, e ele estava com Deus e era Deus.",
+        "wordCount": 16,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/JHN.1.1"
+      }
+    },
+    "Gn 1:1": {
+      "NVI": {
+        "reference": "Gênesis 1:1",
+        "text": "No princípio, Deus criou os céus e a terra.",
+        "wordCount": 9,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/GEN.1.1"
+      },
+      "NBV": {
+        "reference": "Gênesis 1:1",
+        "text": "No princípio Deus criou os céus e a terra.",
+        "wordCount": 9,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/GEN.1.1"
       }
     },
     "Sl 1:1": {
@@ -252,20 +336,6 @@
         "youversionUrl": "https://www.bible.com/pt/bible/1966/PSA.1.6"
       }
     },
-    "Sl 119:11": {
-      "NVI": {
-        "reference": "Salmos 119:11",
-        "text": "Guardei no coração a tua palavra para não pecar contra ti.",
-        "wordCount": 11,
-        "youversionUrl": "https://www.bible.com/pt/bible/129/PSA.119.11"
-      },
-      "NBV": {
-        "reference": "Salmos 119:11",
-        "text": "Suas palavras estão sempre presentes em meu coração para não pecar contra o Senhor.",
-        "wordCount": 14,
-        "youversionUrl": "https://www.bible.com/pt/bible/1966/PSA.119.11"
-      }
-    },
     "Sl 119:103": {
       "NVI": {
         "reference": "Salmos 119:103",
@@ -322,18 +392,116 @@
         "youversionUrl": "https://www.bible.com/pt/bible/1966/GEN.1.3"
       }
     },
-    "Jó 3:2": {
+    "Ex 20:13": {
       "NVI": {
-        "reference": "Jó 3:2",
-        "text": "Ele disse:",
+        "reference": "Êxodo 20:13",
+        "text": "Não assassine.",
         "wordCount": 2,
-        "youversionUrl": "https://www.bible.com/pt/bible/129/JOB.3.2"
+        "youversionUrl": "https://www.bible.com/pt/bible/129/EXO.20.13"
       },
       "NBV": {
-        "reference": "Jó 3:2",
-        "text": "Jó disse:",
+        "reference": "Êxodo 20:13",
+        "text": "“Não mate.",
         "wordCount": 2,
-        "youversionUrl": "https://www.bible.com/pt/bible/1966/JOB.3.2"
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/EXO.20.13"
+      }
+    },
+    "Ex 20:14": {
+      "NVI": {
+        "reference": "Êxodo 20:14",
+        "text": "Não adultere.",
+        "wordCount": 2,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/EXO.20.14"
+      },
+      "NBV": {
+        "reference": "Êxodo 20:14",
+        "text": "“Não pratique adultério.",
+        "wordCount": 3,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/EXO.20.14"
+      }
+    },
+    "Ex 20:15": {
+      "NVI": {
+        "reference": "Êxodo 20:15",
+        "text": "Não furte.",
+        "wordCount": 2,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/EXO.20.15"
+      },
+      "NBV": {
+        "reference": "Êxodo 20:15",
+        "text": "“Não roube.",
+        "wordCount": 2,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/EXO.20.15"
+      }
+    },
+    "Ex 20:16": {
+      "NVI": {
+        "reference": "Êxodo 20:16",
+        "text": "Não dê falso testemunho contra o seu próximo.",
+        "wordCount": 8,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/EXO.20.16"
+      },
+      "NBV": {
+        "reference": "Êxodo 20:16",
+        "text": "“Não dê falso testemunho contra o seu próximo.",
+        "wordCount": 8,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/EXO.20.16"
+      }
+    },
+    "Jo 6:48": {
+      "NVI": {
+        "reference": "João 6:48",
+        "text": "Eu sou o pão da vida.",
+        "wordCount": 6,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/JHN.6.48"
+      },
+      "NBV": {
+        "reference": "João 6:48",
+        "text": "Sim, eu sou o pão da vida!",
+        "wordCount": 7,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/JHN.6.48"
+      }
+    },
+    "Jo 8:1": {
+      "NVI": {
+        "reference": "João 8:1",
+        "text": "Jesus, porém, foi para o monte das Oliveiras.",
+        "wordCount": 8,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/JHN.8.1"
+      },
+      "NBV": {
+        "reference": "João 8:1",
+        "text": "Jesus, porém, voltou para o monte das Oliveiras.",
+        "wordCount": 8,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/JHN.8.1"
+      }
+    },
+    "Jo 6:4": {
+      "NVI": {
+        "reference": "João 6:4",
+        "text": "Estava próxima a festa judaica da Páscoa.",
+        "wordCount": 7,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/JHN.6.4"
+      },
+      "NBV": {
+        "reference": "João 6:4",
+        "text": "Estava próximo da comemoração anual da Páscoa.",
+        "wordCount": 7,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/JHN.6.4"
+      }
+    },
+    "Jo 8:12": {
+      "NVI": {
+        "reference": "João 8:12",
+        "text": "Falando novamente ao povo, Jesus disse: ― Eu sou a luz do mundo. Quem me segue nunca andará em trevas, mas terá a luz da vida.",
+        "wordCount": 25,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/JHN.8.12"
+      },
+      "NBV": {
+        "reference": "João 8:12",
+        "text": "Depois, em um de seus ensinos, Jesus disse ao povo: “Eu sou a luz do mundo. Se vocês me seguirem, não vão tropeçar na escuridão, mas terão a luz da vida”.",
+        "wordCount": 31,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/JHN.8.12"
       }
     }
   }
