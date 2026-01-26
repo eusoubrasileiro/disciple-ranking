@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Loader2, Check, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { TabsContent, Tabs } from '@/components/ui/tabs';
-import { useToast } from '@/hooks/use-toast';
 import { useAdminApi } from '@/hooks/useAdminApi';
 import { AdminTabs } from '@/components/admin/AdminTabs';
 import { AttendanceControls } from '@/components/admin/AttendanceControls';
@@ -13,7 +13,6 @@ import { ConfigPanel } from '@/components/admin/ConfigPanel';
 import type { Participant, Rule, VersesData, LeaderboardData } from '@/hooks/useLeaderboardData';
 
 export default function Admin() {
-  const { toast } = useToast();
   const api = useAdminApi();
 
   const [activeTab, setActiveTab] = useState('attendance');
@@ -53,15 +52,13 @@ export default function Admin() {
         setVersesData(await versesRes.json());
       }
     } catch (err) {
-      toast({
-        title: 'Erro ao carregar dados',
-        description: err instanceof Error ? err.message : 'Erro desconhecido',
-        variant: 'destructive'
+      toast.error('Erro ao carregar dados', {
+        description: err instanceof Error ? err.message : 'Erro desconhecido'
       });
     } finally {
       setLoading(false);
     }
-  }, [api, toast]);
+  }, [api]);
 
   useEffect(() => {
     fetchData();
@@ -69,10 +66,8 @@ export default function Admin() {
 
   const handleAddBulkAttendance = async () => {
     if (selectedIds.size === 0) {
-      toast({
-        title: 'Nenhum participante selecionado',
-        description: 'Selecione pelo menos um participante',
-        variant: 'destructive'
+      toast.error('Nenhum participante selecionado', {
+        description: 'Selecione pelo menos um participante'
       });
       return;
     }
@@ -94,8 +89,7 @@ export default function Admin() {
         throw new Error(result.error);
       }
 
-      toast({
-        title: 'Presenca adicionada',
+      toast.success('Presenca adicionada', {
         description: `${result.data?.updatedIds.length || 0} participantes atualizados`
       });
 
@@ -103,10 +97,8 @@ export default function Admin() {
       setSelectedIds(new Set());
       await fetchData();
     } catch (err) {
-      toast({
-        title: 'Erro ao adicionar presenca',
-        description: err instanceof Error ? err.message : 'Erro desconhecido',
-        variant: 'destructive'
+      toast.error('Erro ao adicionar presenca', {
+        description: err instanceof Error ? err.message : 'Erro desconhecido'
       });
     } finally {
       setSubmittingAttendance(false);
@@ -116,45 +108,27 @@ export default function Admin() {
   const handleAddVerse = async (participantId: number, ref: string) => {
     const result = await api.addVerse(participantId, ref);
     if (result.error) {
-      toast({
-        title: 'Erro ao adicionar versiculo',
-        description: result.error,
-        variant: 'destructive'
-      });
+      toast.error('Erro ao adicionar versiculo', { description: result.error });
       return;
     }
-    toast({
-      title: 'Versiculo adicionado',
-      description: `${ref} adicionado com sucesso`
-    });
+    toast.success('Versiculo adicionado', { description: `${ref} adicionado com sucesso` });
     await fetchData();
   };
 
   const handleAddVisitor = async (participantId: number, name: string) => {
     const result = await api.addVisitor(participantId, name);
     if (result.error) {
-      toast({
-        title: 'Erro ao adicionar visitante',
-        description: result.error,
-        variant: 'destructive'
-      });
+      toast.error('Erro ao adicionar visitante', { description: result.error });
       return;
     }
-    toast({
-      title: 'Visitante adicionado',
-      description: `${name} adicionado com sucesso`
-    });
+    toast.success('Visitante adicionado', { description: `${name} adicionado com sucesso` });
     await fetchData();
   };
 
   const handleFetchHistory = async () => {
     const result = await api.fetchActivityHistory();
     if (result.error) {
-      toast({
-        title: 'Erro ao carregar historico',
-        description: result.error,
-        variant: 'destructive'
-      });
+      toast.error('Erro ao carregar historico', { description: result.error });
       return undefined;
     }
     return result.data;
@@ -179,35 +153,21 @@ export default function Admin() {
     }
 
     if (result?.error) {
-      toast({
-        title: 'Erro ao excluir',
-        description: result.error,
-        variant: 'destructive'
-      });
+      toast.error('Erro ao excluir', { description: result.error });
       return;
     }
 
-    toast({
-      title: 'Atividade excluida',
-      description: 'A atividade foi removida com sucesso'
-    });
+    toast.success('Atividade excluida', { description: 'A atividade foi removida com sucesso' });
     await fetchData();
   };
 
   const handleUpdatePointsAsOf = async (date: string) => {
     const result = await api.updatePointsAsOf(date);
     if (result.error) {
-      toast({
-        title: 'Erro ao atualizar configuracao',
-        description: result.error,
-        variant: 'destructive'
-      });
+      toast.error('Erro ao atualizar configuracao', { description: result.error });
       return;
     }
-    toast({
-      title: 'Configuracao salva',
-      description: 'Data de comparacao atualizada'
-    });
+    toast.success('Configuracao salva', { description: 'Data de comparacao atualizada' });
     await fetchData();
   };
 

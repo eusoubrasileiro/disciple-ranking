@@ -3,10 +3,10 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { LoadingState } from '@/components/LoadingState';
 import { ErrorState } from '@/components/ErrorState';
+import { ViewModeToggle } from '@/components/ViewModeToggle';
 import { useLeaderboardData } from '@/hooks/useLeaderboardData';
 import { UserPlus, Search, Eye, List, Users, Shield, Crown } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 
 const POINTS_PER_VISITOR = 25;
 
@@ -99,35 +99,15 @@ const Visitantes = () => {
               </div>
 
               {/* View Mode Toggle */}
-              <div className="flex gap-2">
-                <Button
-                  variant={viewMode === 'compact' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setViewMode('compact')}
-                  className={viewMode === 'compact' ? 'bg-primary text-primary-foreground' : ''}
-                >
-                  <List className="w-4 h-4 mr-2" />
-                  Compacto
-                </Button>
-                <Button
-                  variant={viewMode === 'expanded' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setViewMode('expanded')}
-                  className={viewMode === 'expanded' ? 'bg-primary text-primary-foreground' : ''}
-                >
-                  <Eye className="w-4 h-4 mr-2" />
-                  Expandido
-                </Button>
-                <Button
-                  variant={viewMode === 'allVisitors' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setViewMode('allVisitors')}
-                  className={viewMode === 'allVisitors' ? 'bg-primary text-primary-foreground' : ''}
-                >
-                  <Users className="w-4 h-4 mr-2" />
-                  Todos Visitantes
-                </Button>
-              </div>
+              <ViewModeToggle
+                value={viewMode}
+                onChange={setViewMode}
+                options={[
+                  { value: 'compact', label: 'Compacto', icon: List },
+                  { value: 'expanded', label: 'Expandido', icon: Eye },
+                  { value: 'allVisitors', label: 'Todos Visitantes', icon: Users },
+                ]}
+              />
             </div>
           </div>
         </section>

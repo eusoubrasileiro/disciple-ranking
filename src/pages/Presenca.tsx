@@ -1,13 +1,13 @@
 import { useState, useMemo } from 'react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { LoadingState } from '@/components/LoadingState';
+import { ErrorState } from '@/components/ErrorState';
 import { useLeaderboardData } from '@/hooks/useLeaderboardData';
 import { useAppConfig } from '@/ConfigProvider';
 import { Calendar } from '@/components/ui/calendar';
 import { AttendanceDayDetails } from '@/components/attendance/AttendanceDayDetails';
 import {
-  Loader2,
-  AlertCircle,
   CalendarDays,
   Users,
   ChevronDown
@@ -136,28 +136,11 @@ const Presenca = () => {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-8 h-8 text-primary animate-spin" />
-          <p className="text-muted-foreground">Carregando presencas...</p>
-        </div>
-      </div>
-    );
+    return <LoadingState message="Carregando presencas..." />;
   }
 
   if (error || !data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <div className="card-royal p-6 max-w-md text-center">
-          <AlertCircle className="w-12 h-12 text-destructive mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-foreground mb-2">Erro ao carregar</h2>
-          <p className="text-muted-foreground">
-            {error || 'Nao foi possivel carregar os dados.'}
-          </p>
-        </div>
-      </div>
-    );
+    return <ErrorState message={error || 'Nao foi possivel carregar os dados.'} />;
   }
 
   // Sort participants by name for filter dropdown

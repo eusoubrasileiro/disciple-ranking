@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useFetchJson } from "./useFetchJson";
 
 export interface BonusResult {
   participantId: number;
@@ -22,19 +22,4 @@ export interface BonusData {
 /**
  * Hook to fetch bonus data from the bonus.json file
  */
-export const useBonusData = () => {
-  return useQuery<BonusData>({
-    queryKey: ["bonus"],
-    queryFn: async () => {
-      const response = await fetch(`${import.meta.env.BASE_URL}data/bonus.json`);
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch bonus data");
-      }
-
-      return response.json();
-    },
-    // Cache for 1 hour
-    staleTime: 1000 * 60 * 60,
-  });
-};
+export const useBonusData = () => useFetchJson<BonusData>("bonus", "bonus.json");

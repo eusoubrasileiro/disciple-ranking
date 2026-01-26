@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useFetchJson } from "./useFetchJson";
 
 export interface GameRule {
   position: number;
@@ -31,19 +31,4 @@ export interface GamesData {
 /**
  * Hook to fetch games data from the games.json file
  */
-export const useGamesData = () => {
-  return useQuery<GamesData>({
-    queryKey: ["games"],
-    queryFn: async () => {
-      const response = await fetch(`${import.meta.env.BASE_URL}data/games.json`);
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch games data");
-      }
-
-      return response.json();
-    },
-    // Cache for 1 hour
-    staleTime: 1000 * 60 * 60,
-  });
-};
+export const useGamesData = () => useFetchJson<GamesData>("games", "games.json");

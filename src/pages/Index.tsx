@@ -4,35 +4,19 @@ import { RulesSection } from '@/components/RulesSection';
 import { Podium } from '@/components/Podium';
 import { Leaderboard } from '@/components/Leaderboard';
 import { Footer } from '@/components/Footer';
+import { LoadingState } from '@/components/LoadingState';
+import { ErrorState } from '@/components/ErrorState';
 import { useLeaderboardData } from '@/hooks/useLeaderboardData';
-import { Loader2, AlertCircle } from 'lucide-react';
 
 const Index = () => {
   const { data, loading, error, sortedParticipants } = useLeaderboardData();
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-8 h-8 text-primary animate-spin" />
-          <p className="text-muted-foreground">Carregando ranking...</p>
-        </div>
-      </div>
-    );
+    return <LoadingState message="Carregando ranking..." />;
   }
 
   if (error || !data) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <div className="card-royal p-6 max-w-md text-center">
-          <AlertCircle className="w-12 h-12 text-destructive mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-foreground mb-2">Erro ao carregar</h2>
-          <p className="text-muted-foreground">
-            {error || 'Não foi possível carregar os dados do ranking.'}
-          </p>
-        </div>
-      </div>
-    );
+    return <ErrorState message={error || 'Não foi possível carregar os dados do ranking.'} />;
   }
 
   return (

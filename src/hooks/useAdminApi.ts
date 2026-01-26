@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import type { Participant } from '@/hooks/useLeaderboardData';
 
 interface ApiResult<T> {
@@ -22,193 +22,84 @@ interface ActivityItem {
   addedAt: string;
 }
 
+/**
+ * Generic request handler that wraps fetch with consistent error handling
+ */
+async function request<T>(
+  url: string,
+  options?: RequestInit,
+  transform?: (data: unknown) => T
+): Promise<ApiResult<T>> {
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error || `Request failed: ${response.status}`);
+    }
+    const data = await response.json();
+    return { data: transform ? transform(data) : data };
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : 'Unknown error' };
+  }
+}
+
+const jsonHeaders = { 'Content-Type': 'application/json' };
+
 export function useAdminApi() {
-  const fetchLeaderboard = useCallback(async (): Promise<ApiResult<ApiLeaderboardData>> => {
-    try {
-      const response = await fetch('/api/leaderboard');
-      if (!response.ok) {
-        throw new Error('Failed to fetch leaderboard');
-      }
-      const data = await response.json();
-      return { data };
-    } catch (err) {
-      return { error: err instanceof Error ? err.message : 'Unknown error' };
-    }
-  }, []);
-
-  const addBulkAttendance = useCallback(async (
-    participantIds: number[],
-    date: string,
-    type: string
-  ): Promise<ApiResult<{ updatedIds: number[] }>> => {
-    try {
-      const response = await fetch('/api/participants/bulk/attendance', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ participantIds, date, type })
-      });
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error || 'Failed to add bulk attendance');
-      }
-      const result = await response.json();
-      return { data: { updatedIds: result.updatedIds } };
-    } catch (err) {
-      return { error: err instanceof Error ? err.message : 'Unknown error' };
-    }
-  }, []);
-
-  const removeAttendance = useCallback(async (
-    participantId: number,
-    index: number
-  ): Promise<ApiResult<Participant>> => {
-    try {
-      const response = await fetch(`/api/participants/${participantId}/attendance/${index}`, {
-        method: 'DELETE'
-      });
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error || 'Failed to remove attendance');
-      }
-      const result = await response.json();
-      return { data: result.participant };
-    } catch (err) {
-      return { error: err instanceof Error ? err.message : 'Unknown error' };
-    }
-  }, []);
-
-  const addVerse = useCallback(async (
-    participantId: number,
-    ref: string
-  ): Promise<ApiResult<Participant>> => {
-    try {
-      const response = await fetch(`/api/participants/${participantId}/verse`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ref })
-      });
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error || 'Failed to add verse');
-      }
-      const result = await response.json();
-      return { data: result.participant };
-    } catch (err) {
-      return { error: err instanceof Error ? err.message : 'Unknown error' };
-    }
-  }, []);
-
-  const removeVerse = useCallback(async (
-    participantId: number,
-    index: number
-  ): Promise<ApiResult<Participant>> => {
-    try {
-      const response = await fetch(`/api/participants/${participantId}/verse/${index}`, {
-        method: 'DELETE'
-      });
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error || 'Failed to remove verse');
-      }
-      const result = await response.json();
-      return { data: result.participant };
-    } catch (err) {
-      return { error: err instanceof Error ? err.message : 'Unknown error' };
-    }
-  }, []);
-
-  const addVisitor = useCallback(async (
-    participantId: number,
-    name: string
-  ): Promise<ApiResult<Participant>> => {
-    try {
-      const response = await fetch(`/api/participants/${participantId}/visitor`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name })
-      });
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error || 'Failed to add visitor');
-      }
-      const result = await response.json();
-      return { data: result.participant };
-    } catch (err) {
-      return { error: err instanceof Error ? err.message : 'Unknown error' };
-    }
-  }, []);
-
-  const removeVisitor = useCallback(async (
-    participantId: number,
-    index: number
-  ): Promise<ApiResult<Participant>> => {
-    try {
-      const response = await fetch(`/api/participants/${participantId}/visitor/${index}`, {
-        method: 'DELETE'
-      });
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error || 'Failed to remove visitor');
-      }
-      const result = await response.json();
-      return { data: result.participant };
-    } catch (err) {
-      return { error: err instanceof Error ? err.message : 'Unknown error' };
-    }
-  }, []);
-
-  const updatePointsAsOf = useCallback(async (
-    pointsAsOf: string
-  ): Promise<ApiResult<{ pointsAsOf: string }>> => {
-    try {
-      const response = await fetch('/api/points-as-of', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pointsAsOf })
-      });
-      if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.error || 'Failed to update pointsAsOf');
-      }
-      const result = await response.json();
-      return { data: { pointsAsOf: result.pointsAsOf } };
-    } catch (err) {
-      return { error: err instanceof Error ? err.message : 'Unknown error' };
-    }
-  }, []);
-
-  const fetchActivityHistory = useCallback(async (): Promise<ApiResult<{ activities: ActivityItem[] }>> => {
-    try {
-      const response = await fetch('/api/activity-history');
-      if (!response.ok) {
-        throw new Error('Failed to fetch activity history');
-      }
-      const data = await response.json();
-      return { data };
-    } catch (err) {
-      return { error: err instanceof Error ? err.message : 'Unknown error' };
-    }
-  }, []);
-
   return useMemo(() => ({
-    fetchLeaderboard,
-    addBulkAttendance,
-    removeAttendance,
-    addVerse,
-    removeVerse,
-    addVisitor,
-    removeVisitor,
-    updatePointsAsOf,
-    fetchActivityHistory
-  }), [
-    fetchLeaderboard,
-    addBulkAttendance,
-    removeAttendance,
-    addVerse,
-    removeVerse,
-    addVisitor,
-    removeVisitor,
-    updatePointsAsOf,
-    fetchActivityHistory
-  ]);
+    fetchLeaderboard: () =>
+      request<ApiLeaderboardData>('/api/leaderboard'),
+
+    addBulkAttendance: (participantIds: number[], date: string, type: string) =>
+      request<{ updatedIds: number[] }>(
+        '/api/participants/bulk/attendance',
+        { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ participantIds, date, type }) },
+        (d) => ({ updatedIds: (d as { updatedIds: number[] }).updatedIds })
+      ),
+
+    removeAttendance: (participantId: number, index: number) =>
+      request<Participant>(
+        `/api/participants/${participantId}/attendance/${index}`,
+        { method: 'DELETE' },
+        (d) => (d as { participant: Participant }).participant
+      ),
+
+    addVerse: (participantId: number, ref: string) =>
+      request<Participant>(
+        `/api/participants/${participantId}/verse`,
+        { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ ref }) },
+        (d) => (d as { participant: Participant }).participant
+      ),
+
+    removeVerse: (participantId: number, index: number) =>
+      request<Participant>(
+        `/api/participants/${participantId}/verse/${index}`,
+        { method: 'DELETE' },
+        (d) => (d as { participant: Participant }).participant
+      ),
+
+    addVisitor: (participantId: number, name: string) =>
+      request<Participant>(
+        `/api/participants/${participantId}/visitor`,
+        { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ name }) },
+        (d) => (d as { participant: Participant }).participant
+      ),
+
+    removeVisitor: (participantId: number, index: number) =>
+      request<Participant>(
+        `/api/participants/${participantId}/visitor/${index}`,
+        { method: 'DELETE' },
+        (d) => (d as { participant: Participant }).participant
+      ),
+
+    updatePointsAsOf: (pointsAsOf: string) =>
+      request<{ pointsAsOf: string }>(
+        '/api/points-as-of',
+        { method: 'PUT', headers: jsonHeaders, body: JSON.stringify({ pointsAsOf }) },
+        (d) => ({ pointsAsOf: (d as { pointsAsOf: string }).pointsAsOf })
+      ),
+
+    fetchActivityHistory: () =>
+      request<{ activities: ActivityItem[] }>('/api/activity-history'),
+  }), []);
 }

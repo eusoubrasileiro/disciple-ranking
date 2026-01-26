@@ -1,6 +1,7 @@
 import type { Rule, Participant, VersesData, AttendanceRecord } from '@/hooks/useLeaderboardData';
 import type { GamesData } from '@/hooks/useGamesData';
 import type { BonusData } from '@/hooks/useBonusData';
+import { expandVerseRange, calculateVersePoints } from '@/lib/verseUtils';
 
 // Type for verse that can be string or object with addedAt
 export type VerseRecord = string | { ref: string; addedAt?: string };
@@ -62,23 +63,6 @@ function getRulePointsByActivityType(rules: Rule[], activityType: string): numbe
  */
 function getRulePointsByPattern(rules: Rule[], pattern: string): number {
   return rules.find(r => r.description.toLowerCase().includes(pattern.toLowerCase()))?.points ?? 0;
-}
-
-/**
- * Expand a verse range (e.g., "Mt 6:9-13") to individual verses
- */
-function expandVerseRange(ref: string): string[] {
-  const match = ref.trim().match(/^([1-3]?\s?[A-Za-zÀ-ÿ]+)\s+(\d+):(\d+)-(\d+)$/);
-  if (!match) return [ref];
-  const [, book, chapter, startVerse, endVerse] = match;
-  const start = parseInt(startVerse, 10);
-  const end = parseInt(endVerse, 10);
-  if (start > end) return [ref];
-  const verses: string[] = [];
-  for (let v = start; v <= end; v++) {
-    verses.push(`${book} ${chapter}:${v}`);
-  }
-  return verses;
 }
 
 /**

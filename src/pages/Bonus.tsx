@@ -3,12 +3,12 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { LoadingState } from '@/components/LoadingState';
 import { ErrorState } from '@/components/ErrorState';
+import { ViewModeToggle } from '@/components/ViewModeToggle';
 import { useLeaderboardData } from '@/hooks/useLeaderboardData';
 import { useBonusData, BonusChallenge, BonusResult } from '@/hooks/useBonusData';
 import { Star, Search, Calendar, Users, Crown, Shield, Dumbbell } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { formatDateShort } from '@/lib/dateUtils';
 import { getParticipantName } from '@/lib/participantUtils';
 
@@ -139,26 +139,14 @@ const Bonus = () => {
               </div>
 
               {/* View Mode Toggle */}
-              <div className="flex gap-2">
-                <Button
-                  variant={viewMode === 'byEvent' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setViewMode('byEvent')}
-                  className={viewMode === 'byEvent' ? 'bg-primary text-primary-foreground' : ''}
-                >
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Por Desafio
-                </Button>
-                <Button
-                  variant={viewMode === 'byParticipant' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setViewMode('byParticipant')}
-                  className={viewMode === 'byParticipant' ? 'bg-primary text-primary-foreground' : ''}
-                >
-                  <Users className="w-4 h-4 mr-2" />
-                  Por Participante
-                </Button>
-              </div>
+              <ViewModeToggle
+                value={viewMode}
+                onChange={setViewMode}
+                options={[
+                  { value: 'byEvent', label: 'Por Desafio', icon: Calendar },
+                  { value: 'byParticipant', label: 'Por Participante', icon: Users },
+                ]}
+              />
             </div>
           </div>
         </section>

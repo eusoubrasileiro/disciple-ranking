@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { LoadingState } from '@/components/LoadingState';
+import { ErrorState } from '@/components/ErrorState';
+import { ViewModeToggle } from '@/components/ViewModeToggle';
 import { useLeaderboardData } from '@/hooks/useLeaderboardData';
 import { useVersesData } from '@/hooks/useVersesData';
-import { Loader2, AlertCircle, BookOpen, Search, ExternalLink, Eye, List, Shield, Crown } from 'lucide-react';
+import { isVerseRange, expandVerseRange, calculateVersePoints } from '@/lib/verseUtils';
+import { BookOpen, Search, ExternalLink, Eye, List, Shield, Crown } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -22,34 +26,6 @@ const Versiculos = () => {
 
   const loading = loadingLeaderboard || loadingVerses;
   const error = errorLeaderboard || (errorVerses ? 'Erro ao carregar versículos' : null);
-
-  // Helper function to check if a reference is a verse range
-  const isVerseRange = (ref: string): boolean => {
-    return /^([1-3]?\s?[A-Za-zÀ-ÿ]+)\s+(\d+):(\d+)-(\d+)$/.test(ref.trim());
-  };
-
-  // Helper function to expand a verse range into individual references
-  const expandVerseRange = (ref: string): string[] => {
-    const match = ref.trim().match(/^([1-3]?\s?[A-Za-zÀ-ÿ]+)\s+(\d+):(\d+)-(\d+)$/);
-    if (!match) return [ref];
-
-    const [, book, chapter, startVerse, endVerse] = match;
-    const start = parseInt(startVerse, 10);
-    const end = parseInt(endVerse, 10);
-
-    if (start > end) return [ref];
-
-    const verses: string[] = [];
-    for (let v = start; v <= end; v++) {
-      verses.push(`${book} ${chapter}:${v}`);
-    }
-    return verses;
-  };
-
-  // Helper function to calculate points based on word count
-  const calculateVersePoints = (wordCount: number): number => {
-    return wordCount >= 20 ? 35 : 25;
-  };
 
   // Helper function to calculate points for a single reference (handles ranges)
   const calculateRefPoints = (ref: string): number => {
@@ -117,26 +93,11 @@ const Versiculos = () => {
   ).sort();
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-8 h-8 text-primary animate-spin" />
-          <p className="text-muted-foreground">Carregando versículos...</p>
-        </div>
-      </div>
-    );
+    return <LoadingState message="Carregando versículos..." />;
   }
 
   if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <div className="card-royal p-6 max-w-md text-center">
-          <AlertCircle className="w-12 h-12 text-destructive mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-foreground mb-2">Erro ao carregar</h2>
-          <p className="text-muted-foreground">{error}</p>
-        </div>
-      </div>
-    );
+    return <ErrorState message={error} />;
   }
 
   const availableVersions = Object.keys(versesData?.versions || {});
@@ -201,35 +162,15 @@ const Versiculos = () => {
                   />
                 </div>
 
-                <div className="flex gap-2">
-                  <Button
-                    variant={viewMode === 'compact' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setViewMode('compact')}
-                    className={viewMode === 'compact' ? 'bg-primary text-primary-foreground' : ''}
-                  >
-                    <List className="w-4 h-4 mr-2" />
-                    Compacto
-                  </Button>
-                  <Button
-                    variant={viewMode === 'expanded' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setViewMode('expanded')}
-                    className={viewMode === 'expanded' ? 'bg-primary text-primary-foreground' : ''}
-                  >
-                    <Eye className="w-4 h-4 mr-2" />
-                    Expandido
-                  </Button>
-                  <Button
-                    variant={viewMode === 'allVerses' ? 'default' : 'outline'}
-                    size="sm"
-                    onClick={() => setViewMode('allVerses')}
-                    className={viewMode === 'allVerses' ? 'bg-primary text-primary-foreground' : ''}
-                  >
-                    <BookOpen className="w-4 h-4 mr-2" />
-                    Todos Versículos
-                  </Button>
-                </div>
+                <ViewModeToggle
+                  value={viewMode}
+                  onChange={setViewMode}
+                  options={[
+                    { value: 'compact', label: 'Compacto', icon: List },
+                    { value: 'expanded', label: 'Expandido', icon: Eye },
+                    { value: 'allVerses', label: 'Todos Versículos', icon: BookOpen },
+                  ]}
+                />
               </div>
 
               {/* Row 2: Version Toggle */}
