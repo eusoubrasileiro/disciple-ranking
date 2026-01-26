@@ -279,6 +279,43 @@ Insert routes in `src/App.tsx` BEFORE the `<Route path="*" element={<NotFound />
 - Access theme colors via Tailwind (e.g., `bg-primary`, `text-accent`)
 - Gold shadows available: `shadow-gold`, `shadow-card`, `shadow-elevated`
 
+## Admin Panel
+
+A local development tool for managing participant data without manually editing JSON files. Only available during development (`npm run dev`).
+
+### Starting the Admin Panel
+Running `npm run dev` starts both the Vite dev server and the Express API server (port 3001). Access the admin panel at `/admin`.
+
+### Architecture
+- **API Server**: `server/index.js` (Express, port 3001)
+- **Data Storage**: Writes to `public/data/leaderboard.json`
+- **Git Sync**: Also syncs to `configs/royal-ambassadors/data/leaderboard.json` for version control
+- **Frontend**: React page at `/admin` route consuming the API
+
+### Tabs
+
+| Tab | Purpose |
+|-----|---------|
+| **Presenca** | Add attendance, verses, and visitors to participants. Select participants with checkboxes, choose date/type, then click "Adicionar Presenca". Use "Vers" and "Visit" buttons for individual actions. |
+| **Historico** | View and delete past activities (attendance records, verses, visitors). |
+| **Config** | Configure `pointsAsOf` date for historical point comparisons. |
+
+### Input Formats
+
+**Verses**: Supports comma-separated input for adding multiple verses at once.
+- Single: `Jo 3:16`
+- Multiple: `Jo 3:16, Sl 23:1, 1Co 13:4`
+
+**Visitors**: Enter visitor name (single entry).
+
+**Attendance Types**:
+- `embaixada` - Embassy meeting
+- `culto` - Worship service
+
+### Verse Reference Format
+Use Portuguese abbreviations: `Jo` (John), `Sl` (Psalms), `1Co` (1 Corinthians), etc.
+- Examples: `Jo 3:16`, `Sl 23:1-6`, `1Co 13:4-8`, `Gn 1:1`
+
 ## Troubleshooting
 
 ### Verses Not Fetching

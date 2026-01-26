@@ -234,40 +234,6 @@ export default function Admin() {
               </div>
             </TabsContent>
 
-            <TabsContent value="verses" className="mt-0">
-              <div className="space-y-4">
-                <p className="text-muted-foreground">
-                  Use a aba "Presenca" para adicionar versiculos a participantes individuais clicando no botao "Vers".
-                </p>
-                <ParticipantGrid
-                  participants={data?.participants || []}
-                  rules={rules}
-                  versesData={versesData}
-                  selectedIds={new Set()}
-                  onSelectionChange={() => {}}
-                  onAddVerse={handleAddVerse}
-                  onAddVisitor={handleAddVisitor}
-                />
-              </div>
-            </TabsContent>
-
-            <TabsContent value="visitors" className="mt-0">
-              <div className="space-y-4">
-                <p className="text-muted-foreground">
-                  Use a aba "Presenca" para adicionar visitantes a participantes individuais clicando no botao "Visit".
-                </p>
-                <ParticipantGrid
-                  participants={data?.participants || []}
-                  rules={rules}
-                  versesData={versesData}
-                  selectedIds={new Set()}
-                  onSelectionChange={() => {}}
-                  onAddVerse={handleAddVerse}
-                  onAddVisitor={handleAddVisitor}
-                />
-              </div>
-            </TabsContent>
-
             <TabsContent value="history" className="mt-0">
               <ActivityHistory
                 onFetch={handleFetchHistory}

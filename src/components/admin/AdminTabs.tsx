@@ -1,5 +1,5 @@
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar, BookOpen, UserPlus, History, Settings } from 'lucide-react';
+import { Calendar, History, Settings } from 'lucide-react';
 
 interface AdminTabsProps {
   value: string;
@@ -9,18 +9,10 @@ interface AdminTabsProps {
 export function AdminTabs({ value, onValueChange }: AdminTabsProps) {
   return (
     <Tabs value={value} onValueChange={onValueChange} className="w-full">
-      <TabsList className="grid w-full grid-cols-5">
+      <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="attendance" className="flex items-center gap-2">
           <Calendar className="h-4 w-4" />
           <span className="hidden sm:inline">Presenca</span>
-        </TabsTrigger>
-        <TabsTrigger value="verses" className="flex items-center gap-2">
-          <BookOpen className="h-4 w-4" />
-          <span className="hidden sm:inline">Versiculos</span>
-        </TabsTrigger>
-        <TabsTrigger value="visitors" className="flex items-center gap-2">
-          <UserPlus className="h-4 w-4" />
-          <span className="hidden sm:inline">Visitantes</span>
         </TabsTrigger>
         <TabsTrigger value="history" className="flex items-center gap-2">
           <History className="h-4 w-4" />

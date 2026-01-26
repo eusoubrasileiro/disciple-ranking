@@ -82,7 +82,15 @@ export function ParticipantGrid({
     setSubmitting(true);
     try {
       if (inlineInput.type === 'verse') {
-        await onAddVerse(inlineInput.participantId, inlineInput.value.trim());
+        // Support comma-separated verse references
+        const refs = inlineInput.value
+          .split(',')
+          .map(ref => ref.trim())
+          .filter(ref => ref.length > 0);
+
+        for (const ref of refs) {
+          await onAddVerse(inlineInput.participantId, ref);
+        }
       } else {
         await onAddVisitor(inlineInput.participantId, inlineInput.value.trim());
       }
@@ -164,7 +172,7 @@ export function ParticipantGrid({
                           value={inlineInput.value}
                           onChange={(e) => setInlineInput({ ...inlineInput, value: e.target.value })}
                           onKeyDown={handleKeyDown}
-                          placeholder={inlineInput.type === 'verse' ? 'Ex: Jo 3:16' : 'Nome'}
+                          placeholder={inlineInput.type === 'verse' ? 'Ex: Jo 3:16, Sl 23:1' : 'Nome'}
                           className="h-8 w-28"
                           autoFocus
                           disabled={submitting}
