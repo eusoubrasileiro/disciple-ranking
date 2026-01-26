@@ -16,12 +16,12 @@ npm run build
 
 ## Sobre Pontuação Anotações
 
-### Ir ao Culto
+### Attendance - Presença
 
-Ir à embaixada é 10 pontos MAS ir por quê ir ao culto é só 2 pontos? 
 Ser cristão é mais difícil do que ser igrejeiro ou do que ser Batista.
 Você pode ir em todas as programações, cultos etc e perder seu irmão, mãe, vizinhos etc, que são seu próximo. 
-Além de ajudar a participação de pessoas não cristãs e não membros da igreja.
+Precisamos adicionar outras atividades para incentivar o cristão a viver sua fé de forma prática. 
+E que pontuem mais do que simplesmente ir a atividades religiosas.
 
 ### Keep in mind
 
