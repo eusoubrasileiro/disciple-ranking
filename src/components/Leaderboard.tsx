@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Search, Users, Medal, Trophy } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import type { Participant } from '@/hooks/useLeaderboardData';
+import { PointsDelta } from '@/components/PointsDelta';
+import type { ParticipantWithPoints } from '@/hooks/useLeaderboardData';
 
 interface LeaderboardProps {
-  participants: Participant[];
+  participants: ParticipantWithPoints[];
 }
 
 export function Leaderboard({ participants }: LeaderboardProps) {
@@ -100,11 +101,14 @@ export function Leaderboard({ participants }: LeaderboardProps) {
                     <div className="col-span-7 font-medium text-foreground truncate">
                       {participant.name}
                     </div>
-                    <div className="col-span-3 text-right flex items-center justify-end gap-1">
-                      <Medal className={`w-4 h-4 ${originalIndex < 3 ? 'text-accent' : 'text-muted-foreground'}`} />
-                      <span className={`font-bold ${originalIndex < 3 ? 'text-accent' : 'text-foreground'}`}>
-                        {participant.points}
-                      </span>
+                    <div className="col-span-3 text-right flex items-center justify-end gap-2">
+                      <PointsDelta delta={participant.pointsDelta} size="sm" />
+                      <div className="flex items-center gap-1">
+                        <Medal className={`w-4 h-4 ${originalIndex < 3 ? 'text-accent' : 'text-muted-foreground'}`} />
+                        <span className={`font-bold ${originalIndex < 3 ? 'text-accent' : 'text-foreground'}`}>
+                          {participant.points}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 );

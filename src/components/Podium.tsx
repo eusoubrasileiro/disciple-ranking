@@ -1,8 +1,9 @@
 import { Crown, Medal } from 'lucide-react';
-import type { Participant } from '@/hooks/useLeaderboardData';
+import { PointsDelta } from '@/components/PointsDelta';
+import type { ParticipantWithPoints } from '@/hooks/useLeaderboardData';
 
 interface PodiumProps {
-  participants: Participant[];
+  participants: ParticipantWithPoints[];
 }
 
 export function Podium({ participants }: PodiumProps) {
@@ -77,6 +78,13 @@ export function Podium({ participants }: PodiumProps) {
                 </span>
                 <span className="text-sm text-muted-foreground ml-1">pts</span>
               </div>
+
+              {/* Points Delta */}
+              {participant.pointsDelta !== undefined && participant.pointsDelta !== 0 && (
+                <div className="mt-1">
+                  <PointsDelta delta={participant.pointsDelta} size="md" />
+                </div>
+              )}
             </div>
           ))}
         </div>
