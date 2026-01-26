@@ -17,20 +17,29 @@ interface AttendanceControlsProps {
   onDateChange: (date: Date) => void;
   attendanceType: string;
   onTypeChange: (type: string) => void;
+  activityTypes?: string[];  // From config, e.g., ["embaixada", "igreja"] or ["quarto", "cozinha"]
 }
 
-const ATTENDANCE_TYPES = [
-  { value: 'embaixada', label: 'Embaixada' },
-  { value: 'igreja', label: 'Igreja' },
-  { value: 'pg', label: 'PG' },
-];
+// Helper to capitalize first letter for display
+function capitalize(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+const DEFAULT_ATTENDANCE_TYPES = ['embaixada', 'igreja'];
 
 export function AttendanceControls({
   date,
   onDateChange,
   attendanceType,
-  onTypeChange
+  onTypeChange,
+  activityTypes = DEFAULT_ATTENDANCE_TYPES
 }: AttendanceControlsProps) {
+  // Build attendance types from config with capitalized labels
+  const attendanceTypeOptions = activityTypes.map(type => ({
+    value: type,
+    label: capitalize(type)
+  }));
+
   return (
     <div className="flex flex-col sm:flex-row gap-4 p-4 bg-muted/50 rounded-lg border">
       <div className="flex items-center gap-2">
@@ -67,7 +76,7 @@ export function AttendanceControls({
           onValueChange={onTypeChange}
           className="flex gap-4"
         >
-          {ATTENDANCE_TYPES.map((type) => (
+          {attendanceTypeOptions.map((type) => (
             <div key={type.value} className="flex items-center space-x-2">
               <RadioGroupItem value={type.value} id={type.value} />
               <Label htmlFor={type.value} className="font-normal cursor-pointer">

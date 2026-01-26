@@ -18,18 +18,27 @@ export const ACTIVITY_TYPES: Record<ActivityType, ActivityTypeConfig> = {
   visitor: { icon: UserPlus, label: 'Visitante' },
 };
 
-export type AttendanceType = 'embaixada' | 'igreja' | 'pg';
-
 interface AttendanceTypeConfig {
   label: string;
   abbrev: string;
 }
 
-export const ATTENDANCE_TYPES: Record<AttendanceType, AttendanceTypeConfig> = {
+// Known attendance types with custom labels - fallback to capitalize for unknown types
+const KNOWN_ATTENDANCE_TYPES: Record<string, AttendanceTypeConfig> = {
   embaixada: { label: 'Embaixada', abbrev: 'Emb' },
   igreja: { label: 'Igreja', abbrev: 'Igr' },
   pg: { label: 'PG', abbrev: 'PG' },
+  // Family config types
+  quarto: { label: 'Quarto', abbrev: 'Qto' },
+  cozinha: { label: 'Cozinha', abbrev: 'Coz' },
+  banheiro: { label: 'Banheiro', abbrev: 'Ban' },
+  fora: { label: 'Fora', abbrev: 'For' },
 };
+
+// Helper to capitalize first letter
+function capitalize(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 /**
  * Get icon component for activity type
@@ -46,15 +55,16 @@ export function getActivityLabel(type: ActivityType): string {
 }
 
 /**
- * Get label for attendance type
+ * Get label for attendance type (supports any dynamic type)
  */
 export function getAttendanceLabel(type: string): string {
-  return ATTENDANCE_TYPES[type as AttendanceType]?.label ?? type;
+  return KNOWN_ATTENDANCE_TYPES[type]?.label ?? capitalize(type);
 }
 
 /**
- * Get abbreviated label for attendance type
+ * Get abbreviated label for attendance type (supports any dynamic type)
  */
 export function getAttendanceAbbrev(type: string): string {
-  return ATTENDANCE_TYPES[type as AttendanceType]?.abbrev ?? type;
+  // For unknown types, use first 3 characters capitalized
+  return KNOWN_ATTENDANCE_TYPES[type]?.abbrev ?? capitalize(type.slice(0, 3));
 }

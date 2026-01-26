@@ -5,11 +5,16 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Read config from environment, default to royal-ambassadors
+const configId = process.env.APP_CONFIG || 'royal-ambassadors';
+console.log(`Admin API using config: ${configId}`);
+
 const PUBLIC_DATA_DIR = path.join(__dirname, '..', 'public', 'data');
 const PUBLIC_LEADERBOARD_FILE = path.join(PUBLIC_DATA_DIR, 'leaderboard.json');
 
 // Config source - changes here are git-tracked and persist across dev restarts
-const CONFIG_DIR = path.join(__dirname, '..', 'configs', 'royal-ambassadors', 'data');
+const CONFIG_DIR = path.join(__dirname, '..', 'configs', configId, 'data');
 const CONFIG_LEADERBOARD_FILE = path.join(CONFIG_DIR, 'leaderboard.json');
 
 // Determine which file to use based on existence

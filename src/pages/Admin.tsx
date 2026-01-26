@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { TabsContent, Tabs } from '@/components/ui/tabs';
 import { useAdminApi } from '@/hooks/useAdminApi';
+import { useAppConfig } from '@/ConfigProvider';
 import { AdminTabs } from '@/components/admin/AdminTabs';
 import { AttendanceControls } from '@/components/admin/AttendanceControls';
 import { ParticipantGrid } from '@/components/admin/ParticipantGrid';
@@ -14,6 +15,7 @@ import type { Participant, Rule, VersesData, LeaderboardData } from '@/hooks/use
 
 export default function Admin() {
   const api = useAdminApi();
+  const config = useAppConfig();
 
   const [activeTab, setActiveTab] = useState('attendance');
   const [data, setData] = useState<LeaderboardData | null>(null);
@@ -21,11 +23,18 @@ export default function Admin() {
   const [versesData, setVersesData] = useState<VersesData | undefined>();
   const [loading, setLoading] = useState(true);
 
-  // Attendance state
+  // Attendance state - default type will be set from config
   const [attendanceDate, setAttendanceDate] = useState<Date>(new Date());
-  const [attendanceType, setAttendanceType] = useState('embaixada');
+  const [attendanceType, setAttendanceType] = useState('');
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
   const [submittingAttendance, setSubmittingAttendance] = useState(false);
+
+  // Set default attendance type from config
+  useEffect(() => {
+    if (config?.activityTypes?.[0] && !attendanceType) {
+      setAttendanceType(config.activityTypes[0]);
+    }
+  }, [config?.activityTypes, attendanceType]);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -189,7 +198,7 @@ export default function Admin() {
                 <ArrowLeft className="h-5 w-5" />
               </Button>
             </Link>
-            <h1 className="text-xl font-semibold">Admin - Embaixadores do Rei</h1>
+            <h1 className="text-xl font-semibold">Admin - {config?.name || 'Carregando...'}</h1>
           </div>
         </div>
       </header>
@@ -205,6 +214,7 @@ export default function Admin() {
                 onDateChange={setAttendanceDate}
                 attendanceType={attendanceType}
                 onTypeChange={setAttendanceType}
+                activityTypes={config?.activityTypes}
               />
 
               <ParticipantGrid
