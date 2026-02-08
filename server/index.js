@@ -66,6 +66,38 @@ app.get('/api/leaderboard', async (req, res) => {
   }
 });
 
+// POST /api/participants/bulk/attendance - Add attendance to multiple participants
+// NOTE: Must be defined BEFORE /:id routes so "bulk" isn't matched as :id
+app.post('/api/participants/bulk/attendance', async (req, res) => {
+  try {
+    const { participantIds, date, type } = req.body;
+    if (!participantIds || !Array.isArray(participantIds) || !date || !type) {
+      return res.status(400).json({ error: 'participantIds (array), date, and type are required' });
+    }
+
+    const data = await readLeaderboard();
+    const addedAt = new Date().toISOString();
+    const updated = [];
+
+    for (const id of participantIds) {
+      const participant = findParticipant(data, id);
+      if (participant) {
+        if (!participant.attendance) {
+          participant.attendance = [];
+        }
+        participant.attendance.push({ date, type, addedAt });
+        updated.push(participant.id);
+      }
+    }
+
+    await writeLeaderboard(data);
+    res.json({ success: true, updatedIds: updated });
+  } catch (err) {
+    console.error('Error adding bulk attendance:', err);
+    res.status(500).json({ error: 'Failed to add bulk attendance' });
+  }
+});
+
 // POST /api/participants/:id/attendance - Add attendance record
 app.post('/api/participants/:id/attendance', async (req, res) => {
   try {
@@ -95,37 +127,6 @@ app.post('/api/participants/:id/attendance', async (req, res) => {
   } catch (err) {
     console.error('Error adding attendance:', err);
     res.status(500).json({ error: 'Failed to add attendance' });
-  }
-});
-
-// POST /api/participants/bulk/attendance - Add attendance to multiple participants
-app.post('/api/participants/bulk/attendance', async (req, res) => {
-  try {
-    const { participantIds, date, type } = req.body;
-    if (!participantIds || !Array.isArray(participantIds) || !date || !type) {
-      return res.status(400).json({ error: 'participantIds (array), date, and type are required' });
-    }
-
-    const data = await readLeaderboard();
-    const addedAt = new Date().toISOString();
-    const updated = [];
-
-    for (const id of participantIds) {
-      const participant = findParticipant(data, id);
-      if (participant) {
-        if (!participant.attendance) {
-          participant.attendance = [];
-        }
-        participant.attendance.push({ date, type, addedAt });
-        updated.push(participant.id);
-      }
-    }
-
-    await writeLeaderboard(data);
-    res.json({ success: true, updatedIds: updated });
-  } catch (err) {
-    console.error('Error adding bulk attendance:', err);
-    res.status(500).json({ error: 'Failed to add bulk attendance' });
   }
 });
 
