@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { Check, X, BookOpen, UserPlus, Loader2 } from 'lucide-react';
+import { Check, X, BookOpen, UserPlus, AlertTriangle, FileText, Loader2 } from 'lucide-react';
 import { parseLocalDate } from '@/lib/dateUtils';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -26,6 +26,8 @@ interface ParticipantGridProps {
   onSelectionChange: (ids: Set<number>) => void;
   onAddVerse: (participantId: number, ref: string) => Promise<void>;
   onAddVisitor: (participantId: number, name: string) => Promise<void>;
+  onAddDiscipline: (participantId: number, points: number, reason: string) => Promise<void>;
+  onAddSermonNote: (participantId: number, points: number, description: string) => Promise<void>;
   loading?: boolean;
 }
 
@@ -37,12 +39,15 @@ export function ParticipantGrid({
   onSelectionChange,
   onAddVerse,
   onAddVisitor,
+  onAddDiscipline,
+  onAddSermonNote,
   loading
 }: ParticipantGridProps) {
   const [inlineInput, setInlineInput] = useState<{
     participantId: number;
-    type: 'verse' | 'visitor';
+    type: 'verse' | 'visitor' | 'discipline' | 'sermonNote';
     value: string;
+    reason?: string;
   } | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -91,6 +96,14 @@ export function ParticipantGrid({
         for (const ref of refs) {
           await onAddVerse(inlineInput.participantId, ref);
         }
+      } else if (inlineInput.type === 'discipline') {
+        const points = Number(inlineInput.value);
+        if (isNaN(points) || points === 0) return;
+        await onAddDiscipline(inlineInput.participantId, points, inlineInput.reason?.trim() || '');
+      } else if (inlineInput.type === 'sermonNote') {
+        const points = Number(inlineInput.value);
+        if (isNaN(points) || points < 0 || points > 30) return;
+        await onAddSermonNote(inlineInput.participantId, points, inlineInput.reason?.trim() || '');
       } else {
         await onAddVisitor(inlineInput.participantId, inlineInput.value.trim());
       }
@@ -168,15 +181,40 @@ export function ParticipantGrid({
                   <TableCell>
                     {showInline ? (
                       <div className="flex items-center gap-1">
-                        <Input
-                          value={inlineInput.value}
-                          onChange={(e) => setInlineInput({ ...inlineInput, value: e.target.value })}
-                          onKeyDown={handleKeyDown}
-                          placeholder={inlineInput.type === 'verse' ? 'Ex: Jo 3:16, Sl 23:1' : 'Nome'}
-                          className="h-8 w-28"
-                          autoFocus
-                          disabled={submitting}
-                        />
+                        {(inlineInput.type === 'discipline' || inlineInput.type === 'sermonNote') ? (
+                          <>
+                            <Input
+                              type="number"
+                              value={inlineInput.value}
+                              onChange={(e) => setInlineInput({ ...inlineInput, value: e.target.value })}
+                              onKeyDown={handleKeyDown}
+                              placeholder={inlineInput.type === 'discipline' ? '-40' : '0-30'}
+                              className="h-8 w-16"
+                              min={inlineInput.type === 'sermonNote' ? 0 : undefined}
+                              max={inlineInput.type === 'sermonNote' ? 30 : undefined}
+                              autoFocus
+                              disabled={submitting}
+                            />
+                            <Input
+                              value={inlineInput.reason || ''}
+                              onChange={(e) => setInlineInput({ ...inlineInput, reason: e.target.value })}
+                              onKeyDown={handleKeyDown}
+                              placeholder={inlineInput.type === 'discipline' ? 'Motivo' : 'Descricao'}
+                              className="h-8 w-24"
+                              disabled={submitting}
+                            />
+                          </>
+                        ) : (
+                          <Input
+                            value={inlineInput.value}
+                            onChange={(e) => setInlineInput({ ...inlineInput, value: e.target.value })}
+                            onKeyDown={handleKeyDown}
+                            placeholder={inlineInput.type === 'verse' ? 'Ex: Jo 3:16, Sl 23:1' : 'Nome'}
+                            className="h-8 w-28"
+                            autoFocus
+                            disabled={submitting}
+                          />
+                        )}
                         <Button
                           size="icon"
                           variant="ghost"
@@ -229,6 +267,36 @@ export function ParticipantGrid({
                         >
                           <UserPlus className="h-3 w-3 mr-1" />
                           Visit
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="h-8 px-2"
+                          onClick={() => setInlineInput({
+                            participantId: participant.id,
+                            type: 'discipline',
+                            value: '',
+                            reason: ''
+                          })}
+                          disabled={loading}
+                        >
+                          <AlertTriangle className="h-3 w-3 mr-1" />
+                          Disc
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="h-8 px-2"
+                          onClick={() => setInlineInput({
+                            participantId: participant.id,
+                            type: 'sermonNote',
+                            value: '',
+                            reason: ''
+                          })}
+                          disabled={loading}
+                        >
+                          <FileText className="h-3 w-3 mr-1" />
+                          Preg
                         </Button>
                       </div>
                     )}

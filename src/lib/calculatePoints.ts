@@ -140,6 +140,11 @@ export function calculateParticipantPoints(
     total += d.points;  // negative values
   });
 
+  // Sermon notes points (0-30 per note, assigned by leader)
+  participant.sermonNotes?.forEach(n => {
+    total += n.points;
+  });
+
   // Game points - sum all results for this participant
   gamesData?.games?.forEach(game => {
     game.results
@@ -228,8 +233,22 @@ export function calculateDeltaPoints(
     });
   }
 
-  // Note: candidatoProgress, disciplines, games, and bonus are not included in delta
-  // as they typically don't have addedAt timestamps
+  // Sermon notes - only count if addedAt >= pointsAsOf
+  participant.sermonNotes?.forEach(n => {
+    if (isAfterDate(n.addedAt, pointsAsOf)) {
+      delta += n.points;
+    }
+  });
+
+  // Candidato progress - only count if addedAt >= pointsAsOf
+  if (participant.candidatoProgress?.addedAt && isAfterDate(participant.candidatoProgress.addedAt, pointsAsOf)) {
+    const prereqPts = getRulePointsByPattern(rules, 'pre-requisitos');
+    const manualPts = getRulePointsByPattern(rules, 'tarefa manual');
+    if (participant.candidatoProgress.prerequisites) delta += prereqPts;
+    delta += (participant.candidatoProgress.manualTasks ?? 0) * manualPts;
+  }
+
+  // Note: disciplines, games, and bonus are not included in delta
 
   return delta;
 }

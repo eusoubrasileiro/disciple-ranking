@@ -15,7 +15,8 @@
     "visitors": { "enabled": true, "label": "Visitantes", "icon": "UserPlus" },
     "games": { "enabled": true, "label": "Jogos", "icon": "Gamepad2" },
     "attendance": { "enabled": true, "label": "Presenca", "icon": "CalendarDays" },
-    "bonus": { "enabled": true, "label": "Bonus", "icon": "Star" }
+    "bonus": { "enabled": true, "label": "Bonus", "icon": "Star" },
+    "data": { "enabled": true, "label": "Dados", "icon": "Database" }
   },
   "features": {
     "bibleVerses": true,
@@ -23,7 +24,8 @@
     "games": true,
     "candidatoProgress": true,
     "attendanceCalendar": true,
-    "bonusPoints": true
+    "bonusPoints": true,
+    "dataViewer": true
   },
   "activityTypes": ["embaixada", "igreja"],
   "terminology": {

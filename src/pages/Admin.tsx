@@ -134,6 +134,26 @@ export default function Admin() {
     await fetchData();
   };
 
+  const handleAddDiscipline = async (participantId: number, points: number, reason: string) => {
+    const result = await api.addDiscipline(participantId, points, reason);
+    if (result.error) {
+      toast.error('Erro ao adicionar disciplina', { description: result.error });
+      return;
+    }
+    toast.success('Disciplina adicionada', { description: `${points} pontos aplicados` });
+    await fetchData();
+  };
+
+  const handleAddSermonNote = async (participantId: number, points: number, description: string) => {
+    const result = await api.addSermonNote(participantId, points, description);
+    if (result.error) {
+      toast.error('Erro ao adicionar anotacao', { description: result.error });
+      return;
+    }
+    toast.success('Anotacao adicionada', { description: `${points} pontos concedidos` });
+    await fetchData();
+  };
+
   const handleFetchHistory = async () => {
     const result = await api.fetchActivityHistory();
     if (result.error) {
@@ -144,7 +164,7 @@ export default function Admin() {
   };
 
   const handleDeleteActivity = async (
-    type: 'attendance' | 'verse' | 'visitor',
+    type: 'attendance' | 'verse' | 'visitor' | 'discipline' | 'sermonNote',
     participantId: number,
     index: number
   ) => {
@@ -158,6 +178,12 @@ export default function Admin() {
         break;
       case 'visitor':
         result = await api.removeVisitor(participantId, index);
+        break;
+      case 'discipline':
+        result = await api.removeDiscipline(participantId, index);
+        break;
+      case 'sermonNote':
+        result = await api.removeSermonNote(participantId, index);
         break;
     }
 
@@ -225,6 +251,8 @@ export default function Admin() {
                 onSelectionChange={setSelectedIds}
                 onAddVerse={handleAddVerse}
                 onAddVisitor={handleAddVisitor}
+                onAddDiscipline={handleAddDiscipline}
+                onAddSermonNote={handleAddSermonNote}
                 loading={submittingAttendance}
               />
 

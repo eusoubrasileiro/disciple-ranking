@@ -98,6 +98,134 @@ app.post('/api/participants/bulk/attendance', async (req, res) => {
   }
 });
 
+// POST /api/participants/:id/discipline - Add discipline record
+app.post('/api/participants/:id/discipline', async (req, res) => {
+  try {
+    const { points, reason } = req.body;
+    if (points === undefined || points === null) {
+      return res.status(400).json({ error: 'points is required' });
+    }
+
+    const data = await readLeaderboard();
+    const participant = findParticipant(data, req.params.id);
+    if (!participant) {
+      return res.status(404).json({ error: 'Participant not found' });
+    }
+
+    if (!participant.disciplines) {
+      participant.disciplines = [];
+    }
+
+    // Format date using local values
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+
+    participant.disciplines.push({
+      date: `${year}-${month}-${day}`,
+      points: Number(points),
+      reason: reason || '',
+      addedAt: now.toISOString()
+    });
+
+    await writeLeaderboard(data);
+    res.json({ success: true, participant });
+  } catch (err) {
+    console.error('Error adding discipline:', err);
+    res.status(500).json({ error: 'Failed to add discipline' });
+  }
+});
+
+// POST /api/participants/:id/sermon-note - Add sermon note record
+app.post('/api/participants/:id/sermon-note', async (req, res) => {
+  try {
+    const { points, description } = req.body;
+    if (points === undefined || points === null) {
+      return res.status(400).json({ error: 'points is required' });
+    }
+    const numPoints = Number(points);
+    if (isNaN(numPoints) || numPoints < 0 || numPoints > 30) {
+      return res.status(400).json({ error: 'points must be between 0 and 30' });
+    }
+
+    const data = await readLeaderboard();
+    const participant = findParticipant(data, req.params.id);
+    if (!participant) {
+      return res.status(404).json({ error: 'Participant not found' });
+    }
+
+    if (!participant.sermonNotes) {
+      participant.sermonNotes = [];
+    }
+
+    // Format date using local values
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+
+    participant.sermonNotes.push({
+      date: `${year}-${month}-${day}`,
+      points: numPoints,
+      description: description || '',
+      addedAt: now.toISOString()
+    });
+
+    await writeLeaderboard(data);
+    res.json({ success: true, participant });
+  } catch (err) {
+    console.error('Error adding sermon note:', err);
+    res.status(500).json({ error: 'Failed to add sermon note' });
+  }
+});
+
+// DELETE /api/participants/:id/sermon-note/:index - Remove sermon note record
+app.delete('/api/participants/:id/sermon-note/:index', async (req, res) => {
+  try {
+    const data = await readLeaderboard();
+    const participant = findParticipant(data, req.params.id);
+    if (!participant) {
+      return res.status(404).json({ error: 'Participant not found' });
+    }
+
+    const index = parseInt(req.params.index);
+    if (!participant.sermonNotes || index < 0 || index >= participant.sermonNotes.length) {
+      return res.status(400).json({ error: 'Invalid sermon note index' });
+    }
+
+    participant.sermonNotes.splice(index, 1);
+    await writeLeaderboard(data);
+    res.json({ success: true, participant });
+  } catch (err) {
+    console.error('Error removing sermon note:', err);
+    res.status(500).json({ error: 'Failed to remove sermon note' });
+  }
+});
+
+// DELETE /api/participants/:id/discipline/:index - Remove discipline record
+app.delete('/api/participants/:id/discipline/:index', async (req, res) => {
+  try {
+    const data = await readLeaderboard();
+    const participant = findParticipant(data, req.params.id);
+    if (!participant) {
+      return res.status(404).json({ error: 'Participant not found' });
+    }
+
+    const index = parseInt(req.params.index);
+    if (!participant.disciplines || index < 0 || index >= participant.disciplines.length) {
+      return res.status(400).json({ error: 'Invalid discipline index' });
+    }
+
+    participant.disciplines.splice(index, 1);
+    await writeLeaderboard(data);
+    res.json({ success: true, participant });
+  } catch (err) {
+    console.error('Error removing discipline:', err);
+    res.status(500).json({ error: 'Failed to remove discipline' });
+  }
+});
+
 // POST /api/participants/:id/attendance - Add attendance record
 app.post('/api/participants/:id/attendance', async (req, res) => {
   try {
@@ -331,6 +459,30 @@ app.get('/api/activity-history', async (req, res) => {
           index,
           data: visitor,
           addedAt: visitor.addedAt || '1970-01-01T00:00:00Z'
+        });
+      });
+
+      // Discipline activities
+      participant.disciplines?.forEach((d, index) => {
+        activities.push({
+          type: 'discipline',
+          participantId: participant.id,
+          participantName: participant.name,
+          index,
+          data: d,
+          addedAt: d.addedAt || d.date || '1970-01-01T00:00:00Z'
+        });
+      });
+
+      // Sermon note activities
+      participant.sermonNotes?.forEach((s, index) => {
+        activities.push({
+          type: 'sermonNote',
+          participantId: participant.id,
+          participantName: participant.name,
+          index,
+          data: s,
+          addedAt: s.addedAt || s.date || '1970-01-01T00:00:00Z'
         });
       });
     }

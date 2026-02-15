@@ -21,12 +21,20 @@ export interface AttendanceRecord {
 export interface CandidatoProgress {
   prerequisites?: boolean;      // 55pts when true (1 task)
   manualTasks?: number;         // 0-10, each task = 55pts (10 tasks in Manual do Candidato)
+  addedAt?: string;             // ISO timestamp for delta calculation
 }
 
 export interface DisciplineRecord {
   date: string;
   points: number;  // -10, -7, or -5 depending on member type
   reason?: string;
+}
+
+export interface SermonNoteRecord {
+  date: string;
+  points: number;  // 0-30, proportional to quality/age
+  description?: string;
+  addedAt?: string;
 }
 
 // Verses data structure (from verses.json)
@@ -54,6 +62,7 @@ export interface Participant {
   attendance?: AttendanceRecord[];
   candidatoProgress?: CandidatoProgress;
   disciplines?: DisciplineRecord[];
+  sermonNotes?: SermonNoteRecord[];
   previousPoints?: number;      // Points at last snapshot
   previousPointsAt?: string;    // ISO date of when snapshot was taken
 }

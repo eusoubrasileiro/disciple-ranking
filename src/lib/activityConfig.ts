@@ -1,11 +1,11 @@
-import { Calendar, BookOpen, UserPlus, LucideIcon } from 'lucide-react';
+import { Calendar, BookOpen, UserPlus, AlertTriangle, FileText, LucideIcon } from 'lucide-react';
 
 /**
  * Centralized activity type configuration.
  * Used across ActivityHistory and ParticipantGrid components.
  */
 
-export type ActivityType = 'attendance' | 'verse' | 'visitor';
+export type ActivityType = 'attendance' | 'verse' | 'visitor' | 'discipline' | 'sermonNote';
 
 interface ActivityTypeConfig {
   icon: LucideIcon;
@@ -16,6 +16,8 @@ export const ACTIVITY_TYPES: Record<ActivityType, ActivityTypeConfig> = {
   attendance: { icon: Calendar, label: 'Presenca' },
   verse: { icon: BookOpen, label: 'Versiculo' },
   visitor: { icon: UserPlus, label: 'Visitante' },
+  discipline: { icon: AlertTriangle, label: 'Disciplina' },
+  sermonNote: { icon: FileText, label: 'Anotacao' },
 };
 
 interface AttendanceTypeConfig {

@@ -24,6 +24,7 @@ export interface AppConfig {
     games?: RouteConfig;
     attendance?: RouteConfig;
     bonus?: RouteConfig;
+    data?: RouteConfig;
   };
   features: {
     bibleVerses: boolean;
@@ -32,6 +33,7 @@ export interface AppConfig {
     candidatoProgress?: boolean;
     attendanceCalendar?: boolean;
     bonusPoints?: boolean;
+    dataViewer?: boolean;
   };
   activityTypes: string[];  // e.g., ["embaixada", "igreja"] or ["quarto", "cozinha", "banheiro", "fora"]
   terminology: {

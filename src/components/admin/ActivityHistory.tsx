@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { Trash2, Loader2, RefreshCw } from 'lucide-react';
+import { Trash2, Loader2, RefreshCw, Info } from 'lucide-react';
 import { parseLocalDate } from '@/lib/dateUtils';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 interface ActivityItem {
-  type: 'attendance' | 'verse' | 'visitor';
+  type: 'attendance' | 'verse' | 'visitor' | 'discipline' | 'sermonNote';
   participantId: number;
   participantName: string;
   index: number;
@@ -37,7 +37,7 @@ interface ActivityItem {
 
 interface ActivityHistoryProps {
   onFetch: () => Promise<{ activities: ActivityItem[] } | undefined>;
-  onDelete: (type: 'attendance' | 'verse' | 'visitor', participantId: number, index: number) => Promise<void>;
+  onDelete: (type: 'attendance' | 'verse' | 'visitor' | 'discipline' | 'sermonNote', participantId: number, index: number) => Promise<void>;
 }
 
 export function ActivityHistory({ onFetch, onDelete }: ActivityHistoryProps) {
@@ -92,6 +92,16 @@ export function ActivityHistory({ onFetch, onDelete }: ActivityHistoryProps) {
         const data = activity.data as { name?: string };
         return data.name || '';
       }
+      case 'discipline': {
+        const data = activity.data as { reason?: string; points?: number };
+        const reason = data.reason || 'Sem motivo';
+        return `${reason} (${data.points}pts)`;
+      }
+      case 'sermonNote': {
+        const data = activity.data as { description?: string; points?: number };
+        const desc = data.description || 'Sem descricao';
+        return `${desc} (${data.points}pts)`;
+      }
       default:
         return JSON.stringify(activity.data);
     }
@@ -123,6 +133,14 @@ export function ActivityHistory({ onFetch, onDelete }: ActivityHistoryProps) {
           <RefreshCw className="h-4 w-4 mr-2" />
           Atualizar
         </Button>
+      </div>
+
+      <div className="flex items-start gap-3 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm text-blue-800 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-200">
+        <Info className="h-4 w-4 mt-0.5 shrink-0" />
+        <p>
+          Mostra as 50 atividades mais recentes de todos os participantes.
+          Registros antigos sem data de adicao aparecem com "-".
+        </p>
       </div>
 
       {activities.length === 0 ? (

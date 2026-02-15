@@ -14,7 +14,7 @@ interface ApiLeaderboardData {
 }
 
 interface ActivityItem {
-  type: 'attendance' | 'verse' | 'visitor';
+  type: 'attendance' | 'verse' | 'visitor' | 'discipline' | 'sermonNote';
   participantId: number;
   participantName: string;
   index: number;
@@ -88,6 +88,34 @@ export function useAdminApi() {
     removeVisitor: (participantId: number, index: number) =>
       request<Participant>(
         `/api/participants/${participantId}/visitor/${index}`,
+        { method: 'DELETE' },
+        (d) => (d as { participant: Participant }).participant
+      ),
+
+    addDiscipline: (participantId: number, points: number, reason: string) =>
+      request<Participant>(
+        `/api/participants/${participantId}/discipline`,
+        { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ points, reason }) },
+        (d) => (d as { participant: Participant }).participant
+      ),
+
+    removeDiscipline: (participantId: number, index: number) =>
+      request<Participant>(
+        `/api/participants/${participantId}/discipline/${index}`,
+        { method: 'DELETE' },
+        (d) => (d as { participant: Participant }).participant
+      ),
+
+    addSermonNote: (participantId: number, points: number, description: string) =>
+      request<Participant>(
+        `/api/participants/${participantId}/sermon-note`,
+        { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ points, description }) },
+        (d) => (d as { participant: Participant }).participant
+      ),
+
+    removeSermonNote: (participantId: number, index: number) =>
+      request<Participant>(
+        `/api/participants/${participantId}/sermon-note/${index}`,
         { method: 'DELETE' },
         (d) => (d as { participant: Participant }).participant
       ),

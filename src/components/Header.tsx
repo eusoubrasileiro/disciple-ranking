@@ -1,4 +1,4 @@
-import { Shield, BookOpen, Home, UserPlus, Gamepad2, Star, CalendarDays } from 'lucide-react';
+import { Shield, BookOpen, Home, UserPlus, Gamepad2, Star, CalendarDays, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 import { useAppConfig } from '@/ConfigProvider';
@@ -12,6 +12,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Gamepad2,
   Star,
   CalendarDays,
+  Database,
 };
 
 export function Header() {
@@ -33,6 +34,7 @@ export function Header() {
     { path: '/jogos', route: routes?.games, icon: Gamepad2, fallbackLabel: 'Jogos', feature: 'games' },
     { path: '/presenca', route: routes?.attendance, icon: CalendarDays, fallbackLabel: 'Presenca', feature: 'attendanceCalendar' },
     { path: '/bonus', route: routes?.bonus, icon: Star, fallbackLabel: 'Bonus', feature: 'bonusPoints' },
+    { path: '/dados', route: routes?.data, icon: Database, fallbackLabel: 'Dados', feature: 'dataViewer' },
   ].filter(item => {
     // Always show home
     if (item.path === '/') return true;
@@ -63,7 +65,7 @@ export function Header() {
           </div>
         </Link>
 
-        <nav className="flex items-center gap-2">
+        <nav className="flex items-center gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mr-4 pr-4">
           {navItems.map(item => {
             const Icon = item.icon;
             const label = item.route?.label ?? item.fallbackLabel;

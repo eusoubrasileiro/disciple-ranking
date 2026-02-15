@@ -11,6 +11,7 @@ import Visitantes from "./pages/Visitantes";
 import Jogos from "./pages/Jogos";
 import Presenca from "./pages/Presenca";
 import Bonus from "./pages/Bonus";
+import Dados from "./pages/Dados";
 import NotFound from "./pages/NotFound";
 
 // Only load Admin in development - not bundled in production
@@ -33,6 +34,7 @@ function AppRoutes() {
       {features?.games && <Route path="/jogos" element={<Jogos />} />}
       {features?.attendanceCalendar && <Route path="/presenca" element={<Presenca />} />}
       {features?.bonusPoints && <Route path="/bonus" element={<Bonus />} />}
+      {features?.dataViewer && <Route path="/dados" element={<Dados />} />}
       {import.meta.env.DEV && Admin && (
         <Route
           path="/admin"
