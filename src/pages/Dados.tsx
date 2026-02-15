@@ -114,7 +114,7 @@ const Dados = () => {
                         <div className="mt-4 rounded-lg bg-muted/20 p-2 sm:p-4 overflow-x-auto text-xs sm:text-sm">
                           <JsonView
                             src={data}
-                            collapsed={2}
+                            collapsed={false}
                             enableClipboard
                             theme="default"
                           />
