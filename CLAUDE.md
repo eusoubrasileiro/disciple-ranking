@@ -110,9 +110,34 @@ The application uses a custom "Royal Theme" design system with:
     id: number;
     name: string;
     points: number;
-    memorizedVerses?: string[];  // Optional array of verse references (e.g., ["Jo 3:16", "Sl 23:1"])
+    memorizedVerses?: VerseRecord[];  // See VerseRecord format below
   }>;
 }
+
+// VerseRecord can be a plain string (legacy) or an object:
+type VerseRecord = string | {
+  ref: string;            // Verse reference (e.g., "Jo 3:16")
+  addedAt?: string;       // ISO timestamp — REQUIRED for new verses (delta calculation depends on it)
+  suspended?: boolean;    // true = verse temporarily removed from scoring
+  suspendedAt?: string;   // ISO timestamp of when it was suspended
+};
+```
+
+**IMPORTANT — Adding verses to leaderboard.json:**
+- **New verses MUST always use the object format with `addedAt`**. Without `addedAt`, the verse won't appear in delta arrows (up arrows on the ranking). Plain strings are only acceptable for legacy verses that predate the tracking system.
+- To **suspend** a verse (boy couldn't recite it), add `"suspended": true` and `"suspendedAt"`. Points are deducted, but the verse stays in the list for later restoration.
+- To **restore** a suspended verse, remove `"suspended"` and `"suspendedAt"` (or set `"suspended": false`).
+
+```
+// NEW verse (correct):
+{ "ref": "Jo 3:16", "addedAt": "2026-02-18T12:00:00.000Z" }
+
+// NEW verse (WRONG — delta arrows won't work):
+"Jo 3:16"
+
+// Suspended verse:
+{ "ref": "Jo 3:16", "addedAt": "...", "suspended": true, "suspendedAt": "2026-02-18T12:00:00.000Z" }
+```
 ```
 
 ### Verses Data (`public/data/verses.json`)
@@ -240,12 +265,17 @@ Modify `public/data/leaderboard.json` directly. The sorting logic is in `useLead
 - Secondary sort: Name (alphabetical, locale-aware)
 
 ### Adding Memorized Verses
-1. Add verse references to `memorizedVerses` array in participant object:
+1. Add new verses using the **object format with `addedAt`** (NEVER as plain strings):
    ```json
-   { "id": 1, "name": "Arthur", "points": 150, "memorizedVerses": ["Jo 3:16", "Sl 23:1"] }
+   { "ref": "Jo 3:16", "addedAt": "2026-02-18T12:00:00.000Z" }
    ```
-2. Run `npm run fetch-verses` to fetch verse text from YouVersion API
-3. Verses will appear on the `/versiculos` page with automatic points calculation
+2. To suspend a verse the boy couldn't recite:
+   ```json
+   { "ref": "Jo 3:16", "addedAt": "...", "suspended": true, "suspendedAt": "2026-02-18T12:00:00.000Z" }
+   ```
+3. Run `npm run fetch-verses` to fetch verse text from YouVersion API
+4. Verses will appear on the `/versiculos` page with automatic points calculation
+5. Always sync: `cp public/data/leaderboard.json configs/royal-ambassadors/data/leaderboard.json`
 
 ### Adding Icons to Rules
 Rules can display custom icons from lucide-react. To add a new icon to a rule:

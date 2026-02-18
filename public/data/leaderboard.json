@@ -17,7 +17,8 @@
         "Jó 3:2",
         "Jo 11:35",
         "Sl 23:2",
-        "Jo 1:1"
+        "Jo 1:1",
+        { "ref": "Sl 132:1-2", "addedAt": "2026-02-18T12:00:00.000Z" }
       ],
       "attendance": [
         {
@@ -144,7 +145,7 @@
         "Mt 6:9-13",
         "Sl 1:1-6",
         "Fp 4:13",
-        "Jó 3:2"
+        { "ref": "Jó 3:2", "suspended": true, "suspendedAt": "2026-02-15T12:00:00.000Z" }
       ],
       "attendance": [
         {
@@ -244,12 +245,12 @@
         "Gn 1:1",
         "Gn 1:3",
         "Jó 3:2",
-        "Mt 6:9-13",
+        { "ref": "Mt 6:9-13", "suspended": true, "suspendedAt": "2026-02-15T12:00:00.000Z" },
         "Sl 23:1",
         "Jo 11:35",
         "Ex 20:13-16",
-        "Jo 6:48",
-        "Jo 8:1"
+        { "ref": "Jo 6:48", "suspended": true, "suspendedAt": "2026-02-15T12:00:00.000Z" },
+        { "ref": "Jo 8:1", "suspended": true, "suspendedAt": "2026-02-15T12:00:00.000Z" }
       ],
       "visitors": [
         "tia Sarah",
@@ -369,7 +370,11 @@
       "memorizedVerses": [
         "Gn 1:1",
         "Fp 4:13",
-        "Jo 3:16"
+        "Jo 3:16",
+        { "ref": "1Ts 5:16-19", "addedAt": "2026-02-18T12:00:00.000Z" },
+        { "ref": "Jo 11:35", "addedAt": "2026-02-18T12:00:00.000Z" },
+        { "ref": "Ex 20:13", "addedAt": "2026-02-18T12:00:00.000Z" },
+        { "ref": "Gn 1:3", "addedAt": "2026-02-18T12:00:00.000Z" }
       ],
       "attendance": [
         {
@@ -442,7 +447,9 @@
         "Jó 3:2",
         "Jo 6:4",
         "Mt 6:9-13",
-        "Jo 6:48"
+        { "ref": "Jo 6:48", "suspended": true, "suspendedAt": "2026-02-15T12:00:00.000Z" },
+        { "ref": "Jo 3:16", "addedAt": "2026-02-18T12:00:00.000Z" },
+        { "ref": "Sl 119:11", "addedAt": "2026-02-18T12:00:00.000Z" }
       ],
       "attendance": [
         {
@@ -563,7 +570,9 @@
         "Jó 3:2",
         "Jo 8:12",
         "Sl 23:1",
-        "Fp 4:13"
+        "Fp 4:13",
+        { "ref": "Mt 6:9-13", "addedAt": "2026-02-18T12:00:00.000Z" },
+        { "ref": "Mt 6:6", "addedAt": "2026-02-18T12:00:00.000Z" }
       ],
       "attendance": [
         {

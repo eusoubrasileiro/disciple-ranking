@@ -7,6 +7,7 @@ import { ViewModeToggle } from '@/components/ViewModeToggle';
 import { useLeaderboardData } from '@/hooks/useLeaderboardData';
 import { useVersesData } from '@/hooks/useVersesData';
 import { isVerseRange, expandVerseRange, calculateVersePoints } from '@/lib/verseUtils';
+import { getVerseRef, isVerseSuspended, type VerseRecord } from '@/lib/calculatePoints';
 import { BookOpen, Search, ExternalLink, Eye, List, Shield, Crown } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -39,14 +40,18 @@ const Versiculos = () => {
     }, 0);
   };
 
-  // Helper function to calculate total points for a participant's verses
-  const calculateTotalVersePoints = (verseRefs: string[]): number => {
-    return verseRefs.reduce((total, ref) => total + calculateRefPoints(ref), 0);
+  // Helper function to calculate total points for a participant's verses (excluding suspended)
+  const calculateTotalVersePoints = (verses: VerseRecord[]): number => {
+    return verses
+      .filter(v => !isVerseSuspended(v))
+      .reduce((total, v) => total + calculateRefPoints(getVerseRef(v)), 0);
   };
 
-  // Helper function to count total individual verses (expanding ranges)
-  const countTotalVerses = (verseRefs: string[]): number => {
-    return verseRefs.reduce((count, ref) => count + expandVerseRange(ref).length, 0);
+  // Helper function to count total individual verses (expanding ranges, excluding suspended)
+  const countTotalVerses = (verses: VerseRecord[]): number => {
+    return verses
+      .filter(v => !isVerseSuspended(v))
+      .reduce((count, v) => count + expandVerseRange(getVerseRef(v)).length, 0);
   };
 
   // Initialize selected version from localStorage or default
@@ -83,12 +88,13 @@ const Versiculos = () => {
       return a.name.localeCompare(b.name);
     }) || [];
 
-  // Get all unique verses for "all verses" view (expanding ranges)
+  // Get all unique verses for "all verses" view (expanding ranges, excluding suspended)
   const allUniqueVerses = Array.from(
     new Set(
       leaderboardData?.participants
-        .flatMap(p => p.memorizedVerses || [])
-        .flatMap(ref => expandVerseRange(ref))
+        .flatMap(p => (p.memorizedVerses || []) as VerseRecord[])
+        .filter(v => !isVerseSuspended(v))
+        .flatMap(v => expandVerseRange(getVerseRef(v)))
     )
   ).sort();
 
@@ -289,11 +295,27 @@ const Versiculos = () => {
 
                         {viewMode === 'compact' ? (
                           <div className="flex flex-wrap gap-2">
-                            {participant.memorizedVerses?.map((ref, idx) => {
+                            {(participant.memorizedVerses as VerseRecord[] | undefined)?.map((verse, idx) => {
+                              const ref = getVerseRef(verse);
+                              const suspended = isVerseSuspended(verse);
                               const range = isVerseRange(ref);
-                              const points = calculateRefPoints(ref);
+                              const points = suspended ? 0 : calculateRefPoints(ref);
                               const expanded = expandVerseRange(ref);
                               const firstVerseData = versesData?.verses[expanded[0]]?.[selectedVersion];
+
+                              if (suspended) {
+                                return (
+                                  <span
+                                    key={idx}
+                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted/50 border border-border text-muted-foreground opacity-60 text-sm font-medium line-through"
+                                    title="Versículo suspenso"
+                                  >
+                                    <span>{ref}</span>
+                                    <span className="text-xs no-underline">suspenso</span>
+                                  </span>
+                                );
+                              }
+
                               return (
                                 <a
                                   key={idx}
@@ -314,20 +336,26 @@ const Versiculos = () => {
                           </div>
                         ) : (
                           <Accordion type="multiple" className="space-y-2">
-                            {participant.memorizedVerses?.map((ref, idx) => {
+                            {(participant.memorizedVerses as VerseRecord[] | undefined)?.map((verse, idx) => {
+                              const ref = getVerseRef(verse);
+                              const suspended = isVerseSuspended(verse);
                               const range = isVerseRange(ref);
                               const expanded = expandVerseRange(ref);
-                              const totalPoints = calculateRefPoints(ref);
+                              const totalPoints = suspended ? 0 : calculateRefPoints(ref);
 
                               if (range) {
                                 // Render verse range with breakdown
                                 return (
-                                  <AccordionItem key={idx} value={`verse-${idx}`} className="border border-border rounded-lg overflow-hidden">
+                                  <AccordionItem key={idx} value={`verse-${idx}`} className={`border border-border rounded-lg overflow-hidden ${suspended ? 'opacity-60' : ''}`}>
                                     <AccordionTrigger className="px-4 hover:bg-muted/50">
                                       <div className="flex items-center gap-2 w-full">
-                                        <span className="font-medium text-accent">{ref}</span>
+                                        <span className={`font-medium ${suspended ? 'text-muted-foreground line-through' : 'text-accent'}`}>{ref}</span>
                                         <span className="text-xs text-muted-foreground">({expanded.length} versículos)</span>
-                                        <span className="text-xs text-accent/70">+{totalPoints} pts</span>
+                                        {suspended ? (
+                                          <span className="text-xs text-muted-foreground">suspenso</span>
+                                        ) : (
+                                          <span className="text-xs text-accent/70">+{totalPoints} pts</span>
+                                        )}
                                       </div>
                                     </AccordionTrigger>
                                     <AccordionContent className="px-4 bg-muted/20">
@@ -379,13 +407,15 @@ const Versiculos = () => {
 
                               // Render single verse
                               const verseData = versesData?.verses[ref]?.[selectedVersion];
-                              const points = verseData?.wordCount ? calculateVersePoints(verseData.wordCount) : null;
+                              const points = (!suspended && verseData?.wordCount) ? calculateVersePoints(verseData.wordCount) : null;
                               return (
-                                <AccordionItem key={idx} value={`verse-${idx}`} className="border border-border rounded-lg overflow-hidden">
+                                <AccordionItem key={idx} value={`verse-${idx}`} className={`border border-border rounded-lg overflow-hidden ${suspended ? 'opacity-60' : ''}`}>
                                   <AccordionTrigger className="px-4 hover:bg-muted/50">
                                     <div className="flex items-center gap-2 w-full">
-                                      <span className="font-medium text-accent">{verseData?.reference || ref}</span>
-                                      {points && (
+                                      <span className={`font-medium ${suspended ? 'text-muted-foreground line-through' : 'text-accent'}`}>{verseData?.reference || ref}</span>
+                                      {suspended ? (
+                                        <span className="text-xs text-muted-foreground">suspenso</span>
+                                      ) : points && (
                                         <span className="text-xs text-accent/70">+{points} pts</span>
                                       )}
                                     </div>

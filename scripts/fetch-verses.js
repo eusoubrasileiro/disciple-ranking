@@ -230,7 +230,10 @@ async function main() {
   const originalRefs = new Set();
   leaderboardData.participants.forEach(participant => {
     if (participant.memorizedVerses && Array.isArray(participant.memorizedVerses)) {
-      participant.memorizedVerses.forEach(ref => originalRefs.add(ref));
+      participant.memorizedVerses.forEach(v => {
+        const ref = typeof v === 'string' ? v : v.ref;
+        if (ref) originalRefs.add(ref);
+      });
     }
   });
 

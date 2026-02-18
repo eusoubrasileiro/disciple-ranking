@@ -3,8 +3,8 @@ import type { GamesData } from '@/hooks/useGamesData';
 import type { BonusData } from '@/hooks/useBonusData';
 import { expandVerseRange, calculateVersePoints } from '@/lib/verseUtils';
 
-// Type for verse that can be string or object with addedAt
-export type VerseRecord = string | { ref: string; addedAt?: string };
+// Type for verse that can be string or object with addedAt (and optional suspended state)
+export type VerseRecord = string | { ref: string; addedAt?: string; suspended?: boolean; suspendedAt?: string };
 
 // Type for visitor that can be string or object with addedAt
 export type VisitorRecord = string | { name: string; addedAt?: string };
@@ -35,6 +35,13 @@ export function getVerseRef(verse: VerseRecord): string {
  */
 export function getVerseAddedAt(verse: VerseRecord): string | undefined {
   return typeof verse === 'string' ? undefined : verse.addedAt;
+}
+
+/**
+ * Check if a verse is suspended (temporarily removed from scoring)
+ */
+export function isVerseSuspended(verse: VerseRecord): boolean {
+  return typeof verse !== 'string' && verse.suspended === true;
 }
 
 /**
@@ -111,6 +118,8 @@ export function calculateParticipantPoints(
     const largeVersePts = getRulePointsByPattern(rules, '>=20') || 35;
 
     participant.memorizedVerses.forEach(verse => {
+      // Skip suspended verses (not counted for points)
+      if (isVerseSuspended(verse as VerseRecord)) return;
       // Handle both string and object format
       const ref = getVerseRef(verse as VerseRecord);
       // Expand ranges (e.g., "Mt 6:9-13") to individual verses
@@ -217,6 +226,8 @@ export function calculateDeltaPoints(
 
     participant.memorizedVerses.forEach(verse => {
       const verseRecord = verse as VerseRecord;
+      // Skip suspended verses (not counted for points)
+      if (isVerseSuspended(verseRecord)) return;
       const addedAt = getVerseAddedAt(verseRecord);
       if (!isAfterDate(addedAt, pointsAsOf)) return;
 

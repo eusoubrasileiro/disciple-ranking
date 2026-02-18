@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { calculateParticipantPoints, calculateDeltaPoints } from '@/lib/calculatePoints';
+import { calculateParticipantPoints, calculateDeltaPoints, type VerseRecord } from '@/lib/calculatePoints';
 import type { GamesData } from '@/hooks/useGamesData';
 import type { BonusData } from '@/hooks/useBonusData';
 
@@ -57,7 +57,7 @@ export interface Participant {
   name: string;
   startPoints?: number;  // Baseline points from before tracking system
   points?: number;       // Legacy field - ignored when computing
-  memorizedVerses?: string[];
+  memorizedVerses?: VerseRecord[];
   visitors?: string[];
   attendance?: AttendanceRecord[];
   candidatoProgress?: CandidatoProgress;
