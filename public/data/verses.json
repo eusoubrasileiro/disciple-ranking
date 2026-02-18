@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-01-25T18:14:41.332Z",
+  "generatedAt": "2026-02-18T18:52:10.795Z",
   "defaultVersion": "NVI",
   "versions": {
     "NVI": {
@@ -236,6 +236,34 @@
         "text": "No princípio era aquele que é a Palavra, e ele estava com Deus e era Deus.",
         "wordCount": 16,
         "youversionUrl": "https://www.bible.com/pt/bible/1966/JHN.1.1"
+      }
+    },
+    "Sl 132:1": {
+      "NVI": {
+        "reference": "Salmos 132:1",
+        "text": "Senhor, lembra‑te de Davi e das dificuldades que enfrentou.",
+        "wordCount": 10,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/PSA.132.1"
+      },
+      "NBV": {
+        "reference": "Salmos 132:1",
+        "text": "Ó Senhor, lembre-se de mim de todas as humilhações por que passei!",
+        "wordCount": 13,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/PSA.132.1"
+      }
+    },
+    "Sl 132:2": {
+      "NVI": {
+        "reference": "Salmos 132:2",
+        "text": "Ele jurou ao Senhor e fez um voto ao Poderoso de Jacó:",
+        "wordCount": 12,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/PSA.132.2"
+      },
+      "NBV": {
+        "reference": "Salmos 132:2",
+        "text": "Lembre-se de como prometi solenemente ao Senhor, o Poderoso de Israel:",
+        "wordCount": 12,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/PSA.132.2"
       }
     },
     "Gn 1:1": {
@@ -476,6 +504,62 @@
         "youversionUrl": "https://www.bible.com/pt/bible/1966/JHN.8.1"
       }
     },
+    "1Ts 5:16": {
+      "NVI": {
+        "reference": "1Tessalonicenses 5:16",
+        "text": "Alegrem‑se sempre.",
+        "wordCount": 3,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/1TH.5.16"
+      },
+      "NBV": {
+        "reference": "1 Tessalonicenses 5:16",
+        "text": "Estejam sempre alegres.",
+        "wordCount": 3,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/1TH.5.16"
+      }
+    },
+    "1Ts 5:17": {
+      "NVI": {
+        "reference": "1Tessalonicenses 5:17",
+        "text": "Orem constantemente.",
+        "wordCount": 2,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/1TH.5.17"
+      },
+      "NBV": {
+        "reference": "1 Tessalonicenses 5:17",
+        "text": "Permaneçam sempre em oração.",
+        "wordCount": 4,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/1TH.5.17"
+      }
+    },
+    "1Ts 5:18": {
+      "NVI": {
+        "reference": "1Tessalonicenses 5:18",
+        "text": "Deem graças em todas as circunstâncias, pois esta é a vontade de Deus para vocês em Cristo Jesus.",
+        "wordCount": 18,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/1TH.5.18"
+      },
+      "NBV": {
+        "reference": "1 Tessalonicenses 5:18",
+        "text": "Estejam sempre agradecidos, haja o que houver, porque esta é a vontade de Deus para com vocês que pertencem a Cristo Jesus.",
+        "wordCount": 22,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/1TH.5.18"
+      }
+    },
+    "1Ts 5:19": {
+      "NVI": {
+        "reference": "1Tessalonicenses 5:19",
+        "text": "Não apaguem o Espírito.",
+        "wordCount": 4,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/1TH.5.19"
+      },
+      "NBV": {
+        "reference": "1 Tessalonicenses 5:19",
+        "text": "Não abafem o Espírito Santo.",
+        "wordCount": 5,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/1TH.5.19"
+      }
+    },
     "Jo 6:4": {
       "NVI": {
         "reference": "João 6:4",
@@ -502,6 +586,20 @@
         "text": "Depois, em um de seus ensinos, Jesus disse ao povo: “Eu sou a luz do mundo. Se vocês me seguirem, não vão tropeçar na escuridão, mas terão a luz da vida”.",
         "wordCount": 31,
         "youversionUrl": "https://www.bible.com/pt/bible/1966/JHN.8.12"
+      }
+    },
+    "Mt 6:6": {
+      "NVI": {
+        "reference": "Mateus 6:6",
+        "text": "Mas, quando você orar, vá para o seu quarto, feche a porta e ore ao seu Pai, que está em secreto. Então, o seu Pai, que vê em secreto, o recompensará.",
+        "wordCount": 31,
+        "youversionUrl": "https://www.bible.com/pt/bible/129/MAT.6.6"
+      },
+      "NBV": {
+        "reference": "Mateus 6:6",
+        "text": "Mas você, quando orar, vá para o seu quarto, feche a porta atrás de você, e ore ao seu Pai que está em secreto; e seu Pai, que conhece os seus segredos, recompensará você.",
+        "wordCount": 34,
+        "youversionUrl": "https://www.bible.com/pt/bible/1966/MAT.6.6"
       }
     }
   }

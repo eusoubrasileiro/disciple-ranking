@@ -13,11 +13,11 @@
         "2 Pe 1:21",
         "Sl 119:11",
         "Mt 6:9-13",
-        "Sl 91:1",
+        { "ref": "Sl 91:1", "suspended": true, "suspendedAt": "2026-02-15T12:00:00.000Z" },
         "Jó 3:2",
         "Jo 11:35",
         "Sl 23:2",
-        "Jo 1:1",
+        { "ref": "Jo 1:1", "suspended": true, "suspendedAt": "2026-02-15T12:00:00.000Z" },
         { "ref": "Sl 132:1-2", "addedAt": "2026-02-18T12:00:00.000Z" }
       ],
       "attendance": [
