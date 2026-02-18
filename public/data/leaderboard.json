@@ -1,6 +1,6 @@
 {
   "season": "2026",
-  "updatedAt": "2026-02-15T12:00:00.000Z",
+  "updatedAt": "2026-02-18T12:00:00.000Z",
   "participants": [
     {
       "id": 1,
@@ -102,6 +102,11 @@
           "date": "2026-02-04",
           "type": "embaixada",
           "addedAt": "2026-02-08T00:35:34.238Z"
+        },
+        {
+          "date": "2026-02-15",
+          "type": "embaixada",
+          "addedAt": "2026-02-18T12:00:00.000Z"
         }
       ],
       "visitors": [
@@ -118,6 +123,12 @@
           "points": -30,
           "reason": "Não leu Daniel 1",
           "addedAt": "2026-02-08T00:30:00.975Z"
+        },
+        {
+          "date": "2026-02-15",
+          "points": -20,
+          "reason": "Indisciplina",
+          "addedAt": "2026-02-18T12:00:00.000Z"
         }
       ],
       "sermonNotes": []
@@ -187,6 +198,11 @@
           "date": "2026-02-15",
           "type": "igreja",
           "addedAt": "2026-02-15T12:00:00.000Z"
+        },
+        {
+          "date": "2026-02-15",
+          "type": "embaixada",
+          "addedAt": "2026-02-18T12:00:00.000Z"
         }
       ],
       "candidatoProgress": {
@@ -312,6 +328,11 @@
           "date": "2026-02-07",
           "type": "embaixada",
           "addedAt": "2026-02-08T00:16:54.939Z"
+        },
+        {
+          "date": "2026-02-15",
+          "type": "embaixada",
+          "addedAt": "2026-02-18T12:00:00.000Z"
         }
       ],
       "disciplines": [
@@ -393,6 +414,11 @@
           "date": "2026-02-15",
           "type": "igreja",
           "addedAt": "2026-02-15T12:00:00.000Z"
+        },
+        {
+          "date": "2026-02-15",
+          "type": "embaixada",
+          "addedAt": "2026-02-18T12:00:00.000Z"
         }
       ],
       "visitors": [
@@ -479,6 +505,11 @@
           "date": "2026-02-01",
           "type": "igreja",
           "addedAt": "2026-02-08T00:06:49.443Z"
+        },
+        {
+          "date": "2026-02-15",
+          "type": "embaixada",
+          "addedAt": "2026-02-18T12:00:00.000Z"
         }
       ],
       "visitors": [
@@ -546,6 +577,11 @@
         {
           "date": "2026-01-22",
           "type": "pg"
+        },
+        {
+          "date": "2026-02-15",
+          "type": "embaixada",
+          "addedAt": "2026-02-18T12:00:00.000Z"
         }
       ]
     },
