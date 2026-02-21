@@ -1,6 +1,6 @@
 {
   "season": "2026",
-  "updatedAt": "2026-02-18T12:00:00.000Z",
+  "updatedAt": "2026-02-21T12:00:00.000Z",
   "participants": [
     {
       "id": 1,
@@ -435,6 +435,14 @@
           "points": -10,
           "reason": "não leu Daniel 1",
           "addedAt": "2026-02-08T00:31:22.932Z"
+        }
+      ],
+      "sermonNotes": [
+        {
+          "date": "2026-02-15",
+          "points": 30,
+          "description": "",
+          "addedAt": "2026-02-21T12:00:00.000Z"
         }
       ]
     },
