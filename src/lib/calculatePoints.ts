@@ -259,7 +259,32 @@ export function calculateDeltaPoints(
     delta += (participant.candidatoProgress.manualTasks ?? 0) * manualPts;
   }
 
-  // Note: disciplines, games, and bonus are not included in delta
+  // Disciplines - only count if addedAt >= pointsAsOf
+  participant.disciplines?.forEach(d => {
+    if (isAfterDate(d.addedAt, pointsAsOf)) {
+      delta += d.points;
+    }
+  });
+
+  // Game points - only count if game.date >= pointsAsOf
+  gamesData?.games?.forEach(game => {
+    if (!isAfterDate(game.date, pointsAsOf)) return;
+    game.results
+      .filter(r => r.participantId === participant.id)
+      .forEach(r => {
+        delta += r.points;
+      });
+  });
+
+  // Bonus points - only count if challenge.date >= pointsAsOf
+  bonusData?.challenges?.forEach(challenge => {
+    if (!isAfterDate(challenge.date, pointsAsOf)) return;
+    challenge.results
+      .filter(r => r.participantId === participant.id)
+      .forEach(r => {
+        delta += r.points;
+      });
+  });
 
   return delta;
 }

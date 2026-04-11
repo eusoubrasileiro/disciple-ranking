@@ -28,6 +28,7 @@ export interface DisciplineRecord {
   date: string;
   points: number;  // -10, -7, or -5 depending on member type
   reason?: string;
+  addedAt?: string;
 }
 
 export interface SermonNoteRecord {
