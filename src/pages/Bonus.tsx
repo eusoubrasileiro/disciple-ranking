@@ -6,7 +6,7 @@ import { ErrorState } from '@/components/ErrorState';
 import { ViewModeToggle } from '@/components/ViewModeToggle';
 import { useLeaderboardData } from '@/hooks/useLeaderboardData';
 import { useBonusData, BonusChallenge, BonusResult } from '@/hooks/useBonusData';
-import { Star, Search, Calendar, Users, Crown, Shield, Dumbbell } from 'lucide-react';
+import { Star, Search, Calendar, Users, Crown, Shield, Dumbbell, BookOpen, Car } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { formatDateShort } from '@/lib/dateUtils';
@@ -16,6 +16,8 @@ import { getParticipantName } from '@/lib/participantUtils';
 const iconMap: Record<string, LucideIcon> = {
   Star,
   Dumbbell,
+  BookOpen,
+  Car,
 };
 
 const Bonus = () => {

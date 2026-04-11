@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-18T12:00:00",
+  "updatedAt": "2026-04-11T12:00:00",
   "challenges": [
     {
       "id": 1,
@@ -25,6 +25,19 @@
       "icon": "BookOpen",
       "results": [
         { "participantId": 2, "points": 25 }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Lava-jato Serviço Real",
+      "date": "2026-04-11",
+      "description": "Bonus por participar do lava-jato do serviço real",
+      "icon": "Car",
+      "results": [
+        { "participantId": 1, "points": 40 },
+        { "participantId": 2, "points": 40 },
+        { "participantId": 3, "points": 40 },
+        { "participantId": 11, "points": 40 }
       ]
     }
   ]
