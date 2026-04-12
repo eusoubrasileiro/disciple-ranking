@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-11T12:00:00",
+  "updatedAt": "2026-04-12T18:00:00",
   "challenges": [
     {
       "id": 1,
@@ -38,6 +38,17 @@
         { "participantId": 2, "points": 40 },
         { "participantId": 3, "points": 40 },
         { "participantId": 11, "points": 40 }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Desafio das Flexoes",
+      "date": "2026-04-12",
+      "description": "Quem fizer 10 flexoes ganha 10 pontos",
+      "icon": "Dumbbell",
+      "results": [
+        { "participantId": 2, "points": 10 },
+        { "participantId": 4, "points": 10 }
       ]
     }
   ]
