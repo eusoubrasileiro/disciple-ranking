@@ -1,6 +1,6 @@
 {
   "season": "2026",
-  "updatedAt": "2026-04-19T12:00:00.000Z",
+  "updatedAt": "2026-05-31T12:00:00.000Z",
   "participants": [
     {
       "id": 1,
@@ -144,6 +144,11 @@
           "date": "2026-04-19",
           "type": "igreja",
           "addedAt": "2026-04-19T12:00:00.000Z"
+        },
+        {
+          "date": "2026-05-30",
+          "type": "embaixada",
+          "addedAt": "2026-05-31T12:00:00.000Z"
         }
       ],
       "visitors": [
@@ -303,6 +308,16 @@
           "date": "2026-04-19",
           "type": "igreja",
           "addedAt": "2026-04-19T12:00:00.000Z"
+        },
+        {
+          "date": "2026-05-30",
+          "type": "embaixada",
+          "addedAt": "2026-05-31T12:00:00.000Z"
+        },
+        {
+          "date": "2026-05-31",
+          "type": "igreja",
+          "addedAt": "2026-05-31T12:00:00.000Z"
         }
       ],
       "visitors": [
@@ -379,7 +394,11 @@
         "tio Marco",
         "Kelly namorada do Marco",
         "Pedro",
-        "Pedro"
+        "Pedro",
+        "Visitante 1 (almoço da igreja 03/05)",
+        "Visitante 2 (almoço da igreja 03/05)",
+        "Visitante 3 (almoço da igreja 03/05)",
+        "Visitante 4 (almoço da igreja 03/05)"
       ],
       "attendance": [
         {
@@ -486,6 +505,11 @@
           "date": "2026-04-14",
           "type": "pg",
           "addedAt": "2026-04-18T12:00:00.000Z"
+        },
+        {
+          "date": "2026-05-30",
+          "type": "embaixada",
+          "addedAt": "2026-05-31T12:00:00.000Z"
         }
       ],
       "disciplines": [

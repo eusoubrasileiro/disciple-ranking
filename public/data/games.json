@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-08T12:00:00",
+  "updatedAt": "2026-05-30T12:00:00",
   "defaultRules": [
     { "position": 1, "label": "1o Lugar", "points": 50 },
     { "position": 2, "label": "2o Lugar", "points": 30 },
@@ -51,6 +51,17 @@
         { "participantId": 4, "position": 1, "points": 60 },
         { "participantId": 2, "position": 2, "points": 40 },
         { "participantId": 3, "position": 3, "points": 20 }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Gincana Daniel 8-12",
+      "date": "2026-05-30",
+      "icon": "Users",
+      "results": [
+        { "participantId": 3, "position": 1, "points": 60 },
+        { "participantId": 2, "position": 2, "points": 40 },
+        { "participantId": 1, "position": 3, "points": 20 }
       ]
     }
   ]
