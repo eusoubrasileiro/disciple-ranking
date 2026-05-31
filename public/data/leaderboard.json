@@ -149,6 +149,11 @@
           "date": "2026-05-30",
           "type": "embaixada",
           "addedAt": "2026-05-31T12:00:00.000Z"
+        },
+        {
+          "date": "2026-05-31",
+          "type": "igreja",
+          "addedAt": "2026-05-31T12:00:00.000Z"
         }
       ],
       "visitors": [
