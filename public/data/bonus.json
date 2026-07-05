@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-18T12:00:00",
+  "updatedAt": "2026-07-05T12:00:00",
   "challenges": [
     {
       "id": 1,
@@ -62,6 +62,16 @@
         { "participantId": 2, "points": 40 },
         { "participantId": 3, "points": 40 },
         { "participantId": 5, "points": 40 }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Estudo sobre Masculinidade",
+      "date": "2026-06-28",
+      "description": "Bonus pelo estudo sobre masculinidade",
+      "icon": "BookOpen",
+      "results": [
+        { "participantId": 1, "points": 80 }
       ]
     }
   ]
