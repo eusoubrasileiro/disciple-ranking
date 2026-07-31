@@ -1,12 +1,11 @@
 {
-  "name": "disciple-ranking",
+  "name": "er-ranking",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "setup-config": "node scripts/setup-config.js",
     "dev": "APP_CONFIG=royal-ambassadors npm run setup-config && vite",
-    "dev:family": "APP_CONFIG=family-morgan-ferreira npm run setup-config && vite",
     "fetch-verses": "node scripts/fetch-verses.js",
     "snapshot": "node scripts/snapshot-points.js",
     "build:er": "APP_CONFIG=royal-ambassadors npm run setup-config && npm run fetch-verses && vite build",
