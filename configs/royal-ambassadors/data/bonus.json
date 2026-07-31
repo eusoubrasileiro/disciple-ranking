@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-05T12:00:00",
+  "updatedAt": "2026-07-12T12:00:00",
   "challenges": [
     {
       "id": 1,
@@ -72,6 +72,30 @@
       "icon": "BookOpen",
       "results": [
         { "participantId": 1, "points": 80 }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Bonus 05/07 - Esgrima Biblica / Revisao",
+      "date": "2026-07-05",
+      "description": "Esgrima biblica (Arthur), revisao (Miguel) e Ligar Embaixador (Daniel)",
+      "icon": "BookOpen",
+      "results": [
+        { "participantId": 1, "points": 60 },
+        { "participantId": 2, "points": 40 },
+        { "participantId": 4, "points": 80 }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Bonus 12/07",
+      "date": "2026-07-12",
+      "description": "Pontuacao de bonus de 12/07",
+      "icon": "Star",
+      "results": [
+        { "participantId": 1, "points": 100 },
+        { "participantId": 3, "points": 60 },
+        { "participantId": 4, "points": 20 }
       ]
     }
   ]
