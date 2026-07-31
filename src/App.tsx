@@ -15,7 +15,7 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 // Get base path from vite config (set at build time)
-const basePath = import.meta.env.BASE_URL.replace(/\/$/, '') || '/disciple-ranking/embaixadores-do-rei';
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '') || '/er-ranking';
 
 function AppRoutes() {
   const config = useAppConfig();

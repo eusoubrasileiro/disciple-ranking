@@ -32,14 +32,6 @@ jobs:
       - name: Build Embaixadores do Rei
         run: npm run build:er
 
-      # Build Family Morgan Ferreira (no Bible verses needed)
-      - name: Build Family Morgan Ferreira
-        run: npm run build:family
-
-      # Create root index.html
-      - name: Create root index
-        run: node scripts/create-root-index.js
-
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

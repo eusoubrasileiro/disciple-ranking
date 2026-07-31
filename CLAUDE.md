@@ -23,7 +23,7 @@ npm run fetch-verses # Manually fetch Bible verses from YouVersion API
 ### Development Server
 - Default port: 8080
 - Host: `::` (IPv6 compatible)
-- Base path: `/royal-ambassadors-ranking/`
+- Base path: `/er-ranking/`
 
 ## Architecture
 
@@ -70,7 +70,7 @@ npm run fetch-verses # Manually fetch Bible verses from YouVersion API
 
 ### Routing
 - React Router DOM v6 configured in `App.tsx`
-- BrowserRouter with basename: `/royal-ambassadors-ranking/`
+- BrowserRouter with basename: `/er-ranking/`
 - Current routes:
   - `/` - Main leaderboard (Index page)
   - `/versiculos` - Bible verses memorization page (Versiculos page)
@@ -249,7 +249,7 @@ The project deploys automatically to GitHub Pages via `.github/workflows/deploy.
 **Required GitHub Secret**:
 - `YOUVERSION_API_KEY` - Set in repository Settings → Secrets and variables → Actions
 
-**Deployment URL**: `https://[username].github.io/royal-ambassadors-ranking/`
+**Deployment URL**: `https://[username].github.io/er-ranking/`
 
 ## Development Notes
 

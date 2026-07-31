@@ -8,7 +8,7 @@
     "src": "/Insignia-ER.png",
     "alt": "Embaixadores do Rei"
   },
-  "basePath": "/disciple-ranking/embaixadores-do-rei/",
+  "basePath": "/er-ranking/",
   "routes": {
     "home": { "enabled": true, "label": "Ranking", "icon": "Home" },
     "verses": { "enabled": true, "label": "Versiculos", "icon": "BookOpen" },

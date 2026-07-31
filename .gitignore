@@ -26,3 +26,10 @@ public/config
 *.njsproj
 *.sln
 *.sw?
+
+# Local dev debris (do not commit)
+.playwright-mcp/
+frontend/
+mcp-logs.txt
+wa-logs.txt
+pedro-delta-check.png

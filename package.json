@@ -9,9 +9,8 @@
     "dev:family": "APP_CONFIG=family-morgan-ferreira npm run setup-config && vite",
     "fetch-verses": "node scripts/fetch-verses.js",
     "snapshot": "node scripts/snapshot-points.js",
-    "build:er": "APP_CONFIG=royal-ambassadors npm run setup-config && npm run fetch-verses && vite build --outDir dist/embaixadores-do-rei",
-    "build:family": "APP_CONFIG=family-morgan-ferreira npm run setup-config && vite build --outDir dist/family-morgan-ferreira",
-    "build": "npm run build:er && npm run build:family && node scripts/create-root-index.js",
+    "build:er": "APP_CONFIG=royal-ambassadors npm run setup-config && npm run fetch-verses && vite build",
+    "build": "npm run build:er",
     "build:dev": "npm run fetch-verses && vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"

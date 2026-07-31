@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
   // Use VITE_BASE_PATH from setup-config.js, fall back to default
-  const basePath = env.VITE_BASE_PATH || '/disciple-ranking/embaixadores-do-rei/';
+  const basePath = env.VITE_BASE_PATH || '/er-ranking/';
 
   return {
     base: basePath,
