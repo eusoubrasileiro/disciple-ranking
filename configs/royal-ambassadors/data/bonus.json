@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-12T12:00:00",
+  "updatedAt": "2026-08-01T21:46:00",
   "challenges": [
     {
       "id": 1,
@@ -96,6 +96,20 @@
         { "participantId": 1, "points": 100 },
         { "participantId": 3, "points": 60 },
         { "participantId": 4, "points": 20 }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "EBF - Escola Biblica de Ferias",
+      "date": "2026-08-01",
+      "description": "Bonus EBF: 40 pts/dia (Arthur/Richarlyson/Miguel 3 dias; Felipe 2 dias; Daniel 1 dia)",
+      "icon": "Church",
+      "results": [
+        { "participantId": 1, "points": 120 },
+        { "participantId": 3, "points": 120 },
+        { "participantId": 4, "points": 120 },
+        { "participantId": 5, "points": 80 },
+        { "participantId": 2, "points": 40 }
       ]
     }
   ]
